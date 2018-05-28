@@ -24,45 +24,29 @@ export class TramitesComponent implements OnInit {
     costo_tramite: number;
     complete: boolean;
 
-    constructor(private tramiteService: TramiteService) {
-        this.tramites.push(<Tramite>{
-            $key: 'LDZFTki5rcfqPN6HwIJ',
-            nombre: 'ruben',
-            apellido_paterno: 'araus',
-            apellido_materno: 'garcia',
-            costo_tramite: 9000,
-            concepto_tramite: 'Arrendamiento'
-        });
-    }
+    constructor(private tramiteService: TramiteService) {}
 
     ngOnInit() {
-
-        this.tramiteService.obtenerTramites().snapshotChanges().toPromise().then(x=>console.log(x));
-        // this.tramiteService.obtenerTramites()
-        //     .snapshotChanges()
-        //     .subscribe(item => {
-        //         console.log(item);
-        //         // item.forEach((elemento: any) => {
-        //         //     let x = elemento.payload.toJSON();
-        //         //     x['$key'] = elemento.key;
-        //         //     this.tramites.push(x as Tramite);
-        //         // });
-        //     }, error => console.log(error));
+        this.getTramites();
     }
 
     guardarTramite(tramite: NgForm){
-        // this.verificarCampos();
-
         this.tramiteService.guardarTramite(tramite.value)
             .then(status => {
                 console.log(status);
+                if (status === 'success') {
+                    this.getTramites();
+                }
             }).catch( error => console.log(error));
     }
 
     getTramites(){
-    }
-
-    verificarCampos(){
+        this.tramiteService.obtenerTramites()
+        .then(tramites => {
+            if(tramites){
+                this.tramites = tramites;
+            }
+        }).catch(error => console.log(error));
     }
 
 }
