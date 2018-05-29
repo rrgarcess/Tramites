@@ -20,6 +20,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AbonoService } from './services/abono.service';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AbonoService } from './services/abono.service';
     AppComponent,
     TramitesComponent,
     PagosComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,11 @@
 <div class="row">
     <div class="col-10">
-        <h2>Abonos de <strong>{{ tramiteActivo.nombre }}
-            {{tramiteActivo.apellido_paterno}}
-            {{tramiteActivo.apellido_materno}} </strong></h2>
+        <h2>Abonos de <strong>{{ tramiteActivo.nombre | capitalize}}
+            {{tramiteActivo.apellido_paterno | capitalize}}
+            {{tramiteActivo.apellido_materno | capitalize}} </strong></h2>
         <h5>Trámite: <strong>{{ tramiteActivo.concepto_tramite }}</strong> </h5>
         <h5>Precio del trámite: <strong>{{ tramiteActivo.costo_tramite | number}}</strong></h5>
+        <h5>Restante: <strong>{{ tramiteActivo.cantidad_deudora }}</strong></h5>
     </div>
     <div class="col-2">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -13,7 +14,7 @@
     </div>
 </div>
 
-<div class="jumbotron"
+<div class="jumbotron fadeInDown"
     *ngIf="!(abonos.length > 0)"
     style="margin-top: 10px;">
     <h3 class="display-3 text-secondary text-center">No hay ningún abono registrado!</h3>
@@ -55,7 +56,7 @@ role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 </div>
 
 <div class="row">
-    <div *ngFor="let abono of abonos" class="col-6">
+    <div *ngFor="let abono of abonos" class="col-6 bl">
         <div class="card m-1 bg-light">
           <div class="card-body">
             <h3 class="card-title">

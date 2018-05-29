@@ -33,11 +33,7 @@ export class PagosComponent implements OnInit, OnDestroy {
             key = params['key'];
         });
 
-        this.abonosService.obtenerTramiteRef(key)
-        .then((data: Tramite) => {
-            this.tramiteActivo = data;
-            console.log(this.tramiteActivo);
-        });
+        this.cargarTramiteActivo(key);
 
         this.abonosService.obtenerAbonos()
         .then((abonos: any) => {
@@ -53,7 +49,16 @@ export class PagosComponent implements OnInit, OnDestroy {
         .then(resultKey => {
             if (resultKey) {
                 console.log('abono agregado');
+                this.cargarTramiteActivo(this.tramiteActivo.$key);
             }
+        });
+    }
+
+    cargarTramiteActivo(key){
+        this.abonosService.obtenerTramiteRef(key)
+        .then((data: Tramite) => {
+            this.tramiteActivo = data;
+            console.log(this.tramiteActivo);
         });
     }
 

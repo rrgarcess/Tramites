@@ -51,9 +51,9 @@ export class AbonoService {
               let resto = this.tramiteActivo.cantidad_deudora - abono.cantidad_abonada;
 
               let updates = {};
-              updates[`tramites/${this.tramiteActivo.$key}/cantidad_deudora`] = resto;
+              updates[`/cantidad_deudora`] = resto;
 
-              this.tramiteRef.set(updates);
+              db.ref(`tramites/${this.tramiteActivo.$key}/cantidad_deudora`).set(resto);
               console.log('actualizar resto a: ', resto);
           }
           resolve(resultKey);
