@@ -7,4 +7,5 @@ export class Tramite {
     telefono?: string;
     concepto_tramite: string;
     costo_tramite: number;
+    cantidad_deudora: number;
 }

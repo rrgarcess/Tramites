@@ -19,6 +19,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { AbonoService } from './services/abono.service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { environment } from '../environments/environment';
     AngularFireAuthModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
-  providers: [TramiteService],
+  providers: [TramiteService, AbonoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

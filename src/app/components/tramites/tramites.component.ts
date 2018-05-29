@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class TramitesComponent implements OnInit {
 
-    private tramites: Tramite[] = [];
+    tramites: Tramite[] = [];
 
     nombre: string;
     apellido_paterno: string;
@@ -32,9 +32,11 @@ export class TramitesComponent implements OnInit {
 
     guardarTramite(tramite: NgForm){
         this.tramiteService.guardarTramite(tramite.value)
-            .then(status => {
-                console.log(status);
-                if (status === 'success') {
+            .then((response:any) => {
+                console.log(response.status);
+
+                if (response.status === 'success') {
+                    console.log('dentro del success');
                     this.getTramites();
                 }
             }).catch( error => console.log(error));

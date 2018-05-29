@@ -17,9 +17,6 @@ export class TramiteService {
     constructor(private firebase: AngularFireDatabase) {
         this.tramites = this.firebase.list('tramites');
         this.tramitesRef = db.ref('tramites');
-        // this.tramitesRef.on('child_added', function(data) {
-        //     console.log(data.val());
-        // });
     }
 
     obtenerTramitesRef(){
@@ -38,6 +35,7 @@ export class TramiteService {
                     telefono: (tramite.telefono || ""),
                     concepto_tramite: tramite.concepto_tramite,
                     costo_tramite: tramite.costo_tramite,
+                    cantidad_deudora: tramite.costo_tramite
                 });
                 resolve({status: 'success'});
             } catch(ex){
@@ -72,4 +70,16 @@ export class TramiteService {
         this.tramites.remove($key);
     }
 
+    obtenerTramite($key: string): Promise<Tramite> {
+        console.log('obtener tramite de: ' + $key);
+
+        return new Promise((resolve, reject) => {
+            let tramiteRef = db.ref('tramites/' + $key);
+            let t = new Tramite();
+            tramiteRef.once('value', (data) => {
+                t = data.val() as Tramite;
+                resolve(t);
+            });
+        });
+    }
 }
