@@ -1,10 +1,13 @@
-<div class="row text-right mt-5">
-    <div class="col-12">
+<div class="row mt-5">
+    <div class="col col-lg-10 col-sm-5">
+        <h2>Trámites</h2>
+    </div>
+    <div class="col col-lg-2 col-sm-5">
         <div class="text-right">
             <button type="button" class="btn btn-primary" data-toggle="modal"
             data-target=".bd-example-modal-lg">Nuevo</button>
 
-            <button type="button" class="btn btn-primary" (click)="getTramites()">Cargar</button>
+            <!-- <button type="button" class="btn btn-primary" (click)="getTramites()">Cargar</button> -->
         </div>
     </div>
 </div>
@@ -79,7 +82,7 @@
             <div class="col-md-10">
                 <p>
                     Nombre del trámite: {{ tramite.concepto_tramite }}
-                    <span class="badge badge-pill badge-info">$ {{ tramite.costo_tramite | number}}</span>
+                    <span class="badge badge-pill badge-success">$ {{ tramite.costo_tramite | number}}</span>
                 </p>
             </div>
             <div class="col-md-2">

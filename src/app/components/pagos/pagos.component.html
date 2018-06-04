@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mt-5">
     <div class="col-10">
         <h2>Abonos de <strong>{{ tramiteActivo.nombre | capitalize}}
             {{tramiteActivo.apellido_paterno | capitalize}}
@@ -55,9 +55,9 @@ role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   </div>
 </div>
 
-<div class="row">
-    <div *ngFor="let abono of abonos" class="col-6 bl">
-        <div class="card m-1 bg-light">
+<!-- <div class="row"> -->
+    <div *ngFor="let abono of abonos" class="col col-lg-6 col-sm-12">
+        <div class="card m-1">
           <div class="card-body">
             <h3 class="card-title">
                 <div class="row">
@@ -80,4 +80,4 @@ role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           </div>
         </div>
     </div>
-</div>
+<!-- </div> -->

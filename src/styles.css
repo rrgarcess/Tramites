@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-primary {
+    background-color: #00b79d;
+    border-color: #009e87;
+}
+
+.btn-primary:hover {
+    background-color: #009e87;
+    border-color: #00917c;
+}
+
+.nav-item, .navbar-brand {
+    color: white;
+}
+
+.custom-navbar {
+    background-color: #00b79d;
+}
+
+body {
+    background-color: #393939;
+    color: white;
+}
+
+.card {
+    background-color: #2f2f2f;
+}
