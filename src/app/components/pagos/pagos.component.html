@@ -55,29 +55,31 @@ role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   </div>
 </div>
 
-<!-- <div class="row"> -->
-    <div *ngFor="let abono of abonos" class="col col-lg-6 col-sm-12">
-        <div class="card m-1">
-          <div class="card-body">
-            <h3 class="card-title">
+<div class="col">
+    <div class="row">
+        <div *ngFor="let abono of abonos" class="col col-sm-12 col-md-12 col-lg-6">
+            <div class="card m-1">
+              <div class="card-body">
+                <h3 class="card-title">
+                    <div class="row">
+                        <div class="col-6">
+                            Abono: ${{ abono.cantidad_abonada | number }}
+                        </div>
+                        <div class="col-6 text-right">
+                            {{abono.fecha | date}}
+                        </div>
+                    </div>
+                </h3>
                 <div class="row">
-                    <div class="col-6">
-                        Abono: ${{ abono.cantidad_abonada | number }}
+                    <div class="col-md-5">
+                        <!-- Restante: {{ tramiteActivo.costo_tramite - abono.cantidad_abonada }} -->
                     </div>
-                    <div class="col-6 text-right">
-                        {{abono.fecha | date}}
+                    <div class="col-md-7 text-right">
+                        <p>{{ abono.descripcion }} &nbsp;</p>
                     </div>
                 </div>
-            </h3>
-            <div class="row">
-                <div class="col-md-5">
-                    <!-- Restante: {{ tramiteActivo.costo_tramite - abono.cantidad_abonada }} -->
-                </div>
-                <div class="col-md-7 text-right">
-                    <p>{{ abono.descripcion }} &nbsp;</p>
-                </div>
+              </div>
             </div>
-          </div>
         </div>
     </div>
-<!-- </div> -->
+</div>
