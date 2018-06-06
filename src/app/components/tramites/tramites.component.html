@@ -93,21 +93,24 @@
                       <h5 class="card-title">{{ tramite.nombre | capitalize}} {{tramite.apellido_paterno | capitalize}} {{tramite.apellido_materno | capitalize}}</h5>
                   </div>
                   <div class="col-lg-1 col-md-2">
-                      <button type="button" class="btn btn-danger">Nepe
+                      <!-- <button type="button" class="btn btn-danger">Nepe
                           <span class="oi oi-trash"></span>
+                      </button> -->
+                      <button class="btn btn-danger">
+                          <img src="./../../../assets/images/delete.png" style="width: 22px; height: 22px">
                       </button>
                   </div>
               </div>
           </div>
           <div class="col">
               <div class="row mt-2">
-                  <div class="col-md-10 col-sm-6">
+                  <div class="col-lg-11 col-md-6">
                       <p>
                           Nombre del trámite: {{ tramite.concepto_tramite }}
                           <span class="badge badge-pill badge-success">$ {{ tramite.costo_tramite | number}}</span>
                       </p>
                   </div>
-                  <div class="col-md-2 col-sm-6">
+                  <div class="col-lg-1 col-md-2">
                       <button type="button" [routerLink]="['/pagos', tramite.$key]" class="btn btn-primary">Pagos</button>
                   </div>
               </div>
