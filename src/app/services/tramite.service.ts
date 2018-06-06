@@ -62,7 +62,7 @@ export class TramiteService {
                 console.log(tramites);
                 resolve(tramites);
             });
-        })
+        });
     }
 
     eliminarTramite($key: string){
@@ -79,6 +79,29 @@ export class TramiteService {
             tramiteRef.once('value', (data) => {
                 t = data.val() as Tramite;
                 resolve(t);
+            });
+        });
+    }
+
+    buscarTramite(termino){
+        let tramites: Tramite[] = [];
+
+        return new Promise((resolve, reject) => {
+            let reference = db.ref('tramites');
+
+            reference.orderByChild('nombre').startAt(termino)
+            .once('child_added', (data) => {
+
+                // let registers = data.val();
+                // for (let key in registers) {
+                //     if (registers.hasOwnProperty(key)) {
+                //         let t = registers[key] as Tramite;
+                //         t.$key = key;
+                //         tramites.push(t);
+                //     }
+                // }
+                // console.log(tramites);
+                resolve(data.key);
             });
         });
     }

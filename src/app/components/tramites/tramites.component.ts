@@ -24,6 +24,8 @@ export class TramitesComponent implements OnInit {
     costo_tramite: number;
     complete: boolean;
 
+    termino_busqueda: string = "";
+
     constructor(private tramiteService: TramiteService) {}
 
     ngOnInit() {

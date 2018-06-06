@@ -37,7 +37,6 @@ export class PagosComponent implements OnInit, OnDestroy {
 
         this.abonosService.obtenerAbonos()
         .then((abonos: any) => {
-            console.log(abonos);
             this.abonos = abonos;
         });
     }
@@ -58,7 +57,7 @@ export class PagosComponent implements OnInit, OnDestroy {
         this.abonosService.obtenerTramiteRef(key)
         .then((data: Tramite) => {
             this.tramiteActivo = data;
-            console.log(this.tramiteActivo);
+            // console.log(this.tramiteActivo);
         });
     }
 

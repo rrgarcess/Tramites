@@ -3,9 +3,10 @@
         <h2>Abonos de <strong>{{ tramiteActivo.nombre | capitalize}}
             {{tramiteActivo.apellido_paterno | capitalize}}
             {{tramiteActivo.apellido_materno | capitalize}} </strong></h2>
-        <h5>Trámite: <strong>{{ tramiteActivo.concepto_tramite }}</strong> </h5>
+        <h5>Nombre del trámite: <strong>{{ tramiteActivo.concepto_tramite }}</strong> </h5>
         <h5>Precio del trámite: <strong>{{ tramiteActivo.costo_tramite | number}}</strong></h5>
         <h5>Restante: <strong>{{ tramiteActivo.cantidad_deudora }}</strong></h5>
+        <h5>Abonado: [<strong>{{ tramiteActivo.cantidad_deudora }}</strong>]</h5>
     </div>
     <div class="col-2">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -20,7 +21,7 @@
     <h3 class="display-3 text-secondary text-center">No hay ningún abono registrado!</h3>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1"
+<div class="modal" id="exampleModal" tabindex="-1"
 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -57,7 +58,7 @@ role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
 <div class="col">
     <div class="row">
-        <div *ngFor="let abono of abonos" class="col col-sm-12 col-md-12 col-lg-6">
+        <div *ngFor="let abono of abonos | orderByDate" class="col col-sm-12 col-md-12 col-lg-6">
             <div class="card m-1">
               <div class="card-body">
                 <h3 class="card-title">

@@ -1,10 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+.form-control:active, .form-control:focus {
+    border-color: #009e87;
+}
+
 .btn-primary {
     background-color: #00b79d;
     border-color: #009e87;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:disabled {
     background-color: #009e87;
     border-color: #00917c;
 }
@@ -18,6 +22,11 @@
 }
 
 body {
+    background-color: #393939;
+    color: white;
+}
+
+.modal-content {
     background-color: #393939;
     color: white;
 }

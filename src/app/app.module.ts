@@ -21,6 +21,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AbonoService } from './services/abono.service';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+import { OrderPipe } from './pipes/order.pipe';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
     TramitesComponent,
     PagosComponent,
     NavMenuComponent,
-    CapitalizePipe
+    CapitalizePipe,
+    FilterPipe,
+    OrderPipe
   ],
   imports: [
     BrowserModule,
