@@ -8,7 +8,7 @@
     border-color: #009e87;
 }
 
-.btn-primary:hover, .btn-primary:disabled {
+.btn-primary:hover, .btn-primary:disabled, .btn-primary:active {
     background-color: #009e87;
     border-color: #00917c;
 }
@@ -33,4 +33,12 @@ body {
 
 .card {
     background-color: #2f2f2f;
+}
+
+.active {
+    color: rgb(201, 201, 201);
+}
+
+.nav-item:hover {
+    color: #00917c;
 }

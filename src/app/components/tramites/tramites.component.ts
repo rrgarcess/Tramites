@@ -25,6 +25,7 @@ export class TramitesComponent implements OnInit {
     complete: boolean;
 
     termino_busqueda: string = "";
+    loading: boolean = true;
 
     constructor(private tramiteService: TramiteService) {}
 
@@ -49,6 +50,7 @@ export class TramitesComponent implements OnInit {
         .then(tramites => {
             if(tramites){
                 this.tramites = tramites;
+                this.loading = false;
             }
         }).catch(error => console.log(error));
     }
