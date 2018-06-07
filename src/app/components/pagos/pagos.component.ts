@@ -16,10 +16,12 @@ export class PagosComponent implements OnInit, OnDestroy {
      subscriber: any;
      tramiteActivo: Tramite = new Tramite();
      abonos: Abono[] = [];
+     abonado: number = 0;
 
      fecha: any;
      cantidad_abonada: number;
      descripcion: string;
+     loading: boolean = true;
 
     constructor(private route: ActivatedRoute,
                 private tramiteService: TramiteService,
@@ -38,6 +40,13 @@ export class PagosComponent implements OnInit, OnDestroy {
         this.abonosService.obtenerAbonos()
         .then((abonos: any) => {
             this.abonos = abonos;
+            this.loading = false;
+
+            if (this.abonos) {
+                for (let i = 0; i < this.abonos.length; i++) {
+                    this.abonado += this.abonos[i].cantidad_abonada;
+                }
+            }
         });
     }
 

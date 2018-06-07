@@ -107,15 +107,16 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
     aria-label="Username" aria-describedby="basic-addon1">
 </div>
 
-
-<div class="row mt-5" *ngIf="loading">
+<!-- Loading -->
+<div class="row mt-5 animated fadeIn" *ngIf="loading">
     <div class="col text-center">
         <i class="fa fa-sync-alt fa-spin fa-5x"></i>
     </div>
 </div>
+
 <!-- Tramites list -->
 <div class="mt-2">
-    <div *ngFor="let tramite of tramites | filterByName:termino_busqueda" class="card m-1">
+    <div *ngFor="let tramite of tramites | filterByName:termino_busqueda" class="card m-1 animated fadeIn">
       <div class="card-body">
           <div class="col">
               <div class="row">
