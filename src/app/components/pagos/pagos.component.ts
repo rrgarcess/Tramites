@@ -5,6 +5,7 @@ import { Tramite } from '../../clases/tramite';
 import { Abono } from '../../clases/abono';
 import { NgForm } from '@angular/forms';
 import { AbonoService } from '../../services/abono.service';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'pagos',
@@ -15,12 +16,13 @@ export class PagosComponent implements OnInit, OnDestroy {
 
      subscriber: any;
      tramiteActivo: Tramite = new Tramite();
+     abonoActivo: Abono = new Abono();
      abonos: Abono[] = [];
      abonado: number = 0;
 
      fecha: any;
      cantidad_abonada: number;
-     descripcion: string;
+     descripcion: string = "";
      loading: boolean = true;
 
     constructor(private route: ActivatedRoute,
@@ -33,40 +35,77 @@ export class PagosComponent implements OnInit, OnDestroy {
         this.subscriber = this.route.params
         .subscribe(params => {
             key = params['key'];
+            console.log('key', key)
         });
 
-        this.cargarTramiteActivo(key);
+        this.cargarTramiteActivo(key)
+        .then(() => {
+            this.cargarAbonos();
+        });
+    }
 
+    registrarAbono() {
+        if (this.abonoActivo.$key) {
+            //actualiza abono
+            console.log('actualizar abono');
+            console.log(this.abonoActivo);
+            this.abonosService.actualizaTramite(this.abonoActivo)
+            .then((response: any) => {
+                console.log(response);
+                if (response.status == 'success') {
+                    this.cargarAbonos();
+                }
+            });
+        } else {
+            //nuevo abono
+            console.log('agregar abono');
+            console.log(this.abonoActivo);
+            if (!this.abonoActivo.fecha) {
+                this.abonoActivo.fecha = new Date();
+            }
+            this.abonosService.agregarAbono(this.abonoActivo)
+            .then(resultKey => {
+                if (resultKey) {
+                    console.log('abono agregado');
+                    this.cargarTramiteActivo(this.tramiteActivo.$key);
+                    this.cargarAbonos();
+                }
+            });
+        }
+        this.abonoActivo = new Abono();
+    }
+
+    cargarAbonos(){
         this.abonosService.obtenerAbonos()
         .then((abonos: any) => {
             this.abonos = abonos;
             this.loading = false;
 
             if (this.abonos) {
+                this.abonado = 0;
                 for (let i = 0; i < this.abonos.length; i++) {
                     this.abonado += this.abonos[i].cantidad_abonada;
                 }
-            }
-        });
-    }
-
-    registrarAbono(form: NgForm){
-        let abono = form.value as Abono;
-        this.abonos.push(abono);
-        this.abonosService.agregarAbono(abono)
-        .then(resultKey => {
-            if (resultKey) {
-                console.log('abono agregado');
+                let restante = this.tramiteActivo.costo_tramite - this.abonado;
+                this.tramiteService.actualizarCantidadDeudora(this.tramiteActivo.$key, restante);
                 this.cargarTramiteActivo(this.tramiteActivo.$key);
             }
         });
     }
 
+    cargarAbono($key){
+        this.abonosService.obtenerAbono($key)
+        .then((abono: Abono) => {
+            this.abonoActivo = abono;
+            this.abonoActivo.$key = $key;
+        });
+    }
+
     cargarTramiteActivo(key){
-        this.abonosService.obtenerTramiteRef(key)
+        return this.abonosService.obtenerTramiteRef(key)
         .then((data: Tramite) => {
             this.tramiteActivo = data;
-            // console.log(this.tramiteActivo);
+            // this.cargarAbonos();
         });
     }
 

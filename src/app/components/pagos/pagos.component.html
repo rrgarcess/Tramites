@@ -1,52 +1,66 @@
-<div class="row mt-5">
-    <div class="col-10">
-        <h2>Abonos de <strong class="animated fadeIn">{{ tramiteActivo.nombre | capitalize}}
-            {{tramiteActivo.apellido_paterno | capitalize}}
-            {{tramiteActivo.apellido_materno | capitalize}} </strong></h2>
-        <h5>Nombre del trámite: <strong class="animated fadeIn">{{ tramiteActivo.concepto_tramite }}</strong> </h5>
-        <h5>Precio del trámite: <strong class="animated fadeIn">{{ tramiteActivo.costo_tramite | number}}</strong></h5>
-        <h5>Restante: <strong class="animated fadeIn">{{ tramiteActivo.cantidad_deudora }}</strong></h5>
-        <h5>Abonado: <strong class="animated fadeIn">{{ abonado }}</strong></h5>
-    </div>
-    <div class="col-2">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          Agregar Abono
-        </button>
+<div class="col">
+    <div class="row mt-5">
+        <div class="col-md-9 col-sm-12 col-lg-10">
+            <h2>Abonos de <strong class="animated fadeIn">{{ tramiteActivo.nombre | capitalize}}
+                {{tramiteActivo.apellido_paterno | capitalize}}
+                {{tramiteActivo.apellido_materno | capitalize}} </strong></h2>
+            <h5>Nombre del trámite: <strong class="animated fadeIn">{{ tramiteActivo.concepto_tramite }}</strong> </h5>
+            <h5>Precio del trámite: <strong class="animated fadeIn">{{ tramiteActivo.costo_tramite | number}}</strong></h5>
+            <h5>Restante: <strong class="animated fadeIn">{{ tramiteActivo.cantidad_deudora | number}}</strong></h5>
+            <h5>Abonado: <strong class="animated fadeIn">{{ abonado | number }}</strong></h5>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-2">
+            <button type="button"
+            style="width: 100%"
+             class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Agregar Abono
+            </button>
+        </div>
     </div>
 </div>
+
 
 <!-- Loading -->
 <div class="row mt-5 animated fadeIn" *ngIf="loading">
     <div class="col text-center">
-        <i class="fa fa-sync-alt fa-spin fa-5x"></i>
+        <i class="fa fa-sync-alt fa-spin fa-5x" style="color: white"></i>
     </div>
 </div>
 
-<!-- Show if not exist tramites -->
+<!-- Show if does not exist tramites -->
 <div class="jumbotron fadeInDown"
     *ngIf="!(abonos.length > 0) && !loading"
     style="margin-top: 10px;">
-    <h3 class="display-3 text-secondary text-center">No hay ningún abono registrado!</h3>
+    <h3 class="display-3 text-secondary text-center">No hay ningún abono registrado</h3>
 </div>
 
-<div class="col animated fadeIn">
-    <div class="row">
+<div class="row animated fadeIn">
+    <div class="col">
+        <div class="row">
+
         <div *ngFor="let abono of abonos | orderByDate" class="col col-sm-12 col-md-12 col-lg-6">
-            <div class="card m-1">
+            <div class="card m-1 bg-light">
               <div class="card-body">
                 <h3 class="card-title">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-10">
                             Abono: ${{ abono.cantidad_abonada | number }}
                         </div>
-                        <div class="col-6 text-right">
-                            {{abono.fecha | date}}
+                        <div class="col-2 text-right">
+                            <!-- edit button -->
+                            <button class="btn btn-primary"
+                            (click)="cargarAbono(abono.$key)"
+                            style="width: 100%"
+                            data-toggle="modal"
+                            data-target="#exampleModal">
+                                <i class="far fa-edit" style="color: white"></i>
+                            </button>
                         </div>
                     </div>
                 </h3>
                 <div class="row">
                     <div class="col-md-5">
-                        <!-- Restante: {{ tramiteActivo.costo_tramite - abono.cantidad_abonada }} -->
+                        {{abono.fecha | date}}
                     </div>
                     <div class="col-md-7 text-right">
                         <p>{{ abono.descripcion }} &nbsp;</p>
@@ -54,6 +68,7 @@
                 </div>
               </div>
             </div>
+        </div>
         </div>
     </div>
 </div>
@@ -73,22 +88,29 @@ role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <form #abonoForm="ngForm">
             <div class="form-group">
               <label>Fecha</label>
-              <input type="date" [(ngModel)]="fecha" name="fecha" class="form-control">
+              <input type="date" [(ngModel)]="abonoActivo.fecha" name="fecha"
+              class="form-control" required>
             </div>
             <div class="form-group">
               <label>Cantidad a abonar</label>
-              <input type="number" [(ngModel)]="cantidad_abonada" name="cantidad_abonada" class="form-control">
+              <input type="number" [(ngModel)]="abonoActivo.cantidad_abonada"
+              name="cantidad_abonada" class="form-control" required>
             </div>
             <div class="form-group">
               <label>Descripción (opcional)</label>
-              <input type="text" [(ngModel)]="descripcion" name="descripcion" class="form-control">
+              <input type="text" [(ngModel)]="abonoActivo.descripcion"
+              name="descripcion" class="form-control">
             </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="registrarAbono(abonoForm)"
-        data-dismiss="modal">Abonar</button>
+        <button type="submit" class="btn btn-primary"
+        data-dismiss="modal"
+        (click)="registrarAbono()">
+        <span *ngIf="!abonoActivo.$key">Abonar</span>
+        <span *ngIf="abonoActivo.$key">Actualizar</span>
+        </button>
       </div>
     </div>
   </div>

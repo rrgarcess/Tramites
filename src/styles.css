@@ -1,16 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --dark-primary-color: #1A237E;
+    --primary-color: #303F9F;
+    --light-color: #304FFE;
+    --light-color-hover: #000;
+    --danger-color: #D50000;
+}
+
+
 .form-control:active, .form-control:focus {
-    border-color: #009e87;
+    border-color: var(--dark-primary-color);
 }
 
 .btn-primary {
-    background-color: #00b79d;
-    border-color: #009e87;
+    background-color: var(--light-color);
+    border-color: var(--dark-primary-color);
 }
 
 .btn-primary:hover, .btn-primary:disabled, .btn-primary:active {
-    background-color: #009e87;
-    border-color: #00917c;
+    background-color: var(--dark-primary-color);
+    border-color: var(--dark-primary-color);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
 }
 
 .nav-item, .navbar-brand {
@@ -18,31 +31,21 @@
 }
 
 .custom-navbar {
-    background-color: #00b79d;
-}
-
-body {
-    background-color: #393939;
-    color: white;
-}
-
-.modal-content {
-    background-color: #393939;
-    color: white;
-}
-
-.card {
-    background-color: #2f2f2f;
+    background-color: var(--primary-color);
 }
 
 .active {
-    color: rgb(201, 201, 201);
+    color: #BDBDBD;
 }
 
-.nav-item:hover {
-    color: #00917c;
+.nav-item:hover, .navbar-brand:hover {
+    color: #9E9E9E;
 }
 
+.editable::first-letter, .editable:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
 
 
 /* Animaciones */

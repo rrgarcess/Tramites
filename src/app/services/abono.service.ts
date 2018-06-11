@@ -44,6 +44,14 @@ export class AbonoService {
       });
   }
 
+  obtenerAbono($key): Promise<Abono>{
+      return new Promise((resolve, reject) => {
+          this.tramiteRef.child('abonos').child($key).once('value', (data) => {
+              resolve(data.val() as Abono);
+          });
+      });
+  }
+
   agregarAbono(abono: Abono){
       return new Promise((resolve, reject) => {
           let resultKey = db.ref(`tramites/${this.tramiteActivo.$key}/abonos`).push(abono);
@@ -58,7 +66,18 @@ export class AbonoService {
           }
           resolve(resultKey);
       })
+  }
 
+  actualizaTramite(abono: Abono){
+      return new Promise((resolve, reject) => {
+          db.ref(`tramites/${this.tramiteActivo.$key}/abonos/${abono.$key}`)
+          .set({
+            fecha: abono.fecha,
+            cantidad_abonada: abono.cantidad_abonada,
+            descripcion: abono.descripcion || ''
+          });
+          resolve({status: 'success'});
+      });
   }
 
 }

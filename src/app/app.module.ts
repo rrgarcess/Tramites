@@ -15,14 +15,12 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { APP_ROUTES } from './app.router';
 
 //firebase
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AbonoService } from './services/abono.service';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderPipe } from './pipes/order.pipe';
+import { TramiteComponent } from './components/tramite/tramite.component';
 
 
 @NgModule({
@@ -33,14 +31,12 @@ import { OrderPipe } from './pipes/order.pipe';
     NavMenuComponent,
     CapitalizePipe,
     FilterPipe,
-    OrderPipe
+    OrderPipe,
+    TramiteComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
   providers: [TramiteService, AbonoService],

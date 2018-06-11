@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+// import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Tramite } from '../clases/tramite';
 import { environment } from '../../environments/environment';
 
@@ -11,11 +11,9 @@ const db = firebase.database();
 @Injectable()
 export class TramiteService {
 
-    tramites: AngularFireList<any>;
     tramitesRef;
 
-    constructor(private firebase: AngularFireDatabase) {
-        this.tramites = this.firebase.list('tramites');
+    constructor() {
         this.tramitesRef = db.ref('tramites');
     }
 
@@ -27,7 +25,7 @@ export class TramiteService {
         console.log('guardando tramite...');
         return new Promise((resolve, reject) => {
             try{
-                this.tramites.push({
+                let t = {
                     nombre: tramite.nombre,
                     apellido_paterno: tramite.apellido_paterno,
                     apellido_materno: tramite.apellido_materno,
@@ -36,7 +34,9 @@ export class TramiteService {
                     concepto_tramite: tramite.concepto_tramite,
                     costo_tramite: tramite.costo_tramite,
                     cantidad_deudora: tramite.costo_tramite
-                });
+                };
+
+                this.tramitesRef.push(t);
                 resolve({status: 'success'});
             } catch(ex){
                 console.log(ex);
@@ -67,7 +67,7 @@ export class TramiteService {
 
     eliminarTramite($key: string){
         console.log('eliminando tramite...');
-        this.tramites.remove($key);
+        this.tramitesRef.child($key).remove();
     }
 
     obtenerTramite($key: string): Promise<Tramite> {
@@ -91,18 +91,20 @@ export class TramiteService {
 
             reference.orderByChild('nombre').startAt(termino)
             .once('child_added', (data) => {
-
-                // let registers = data.val();
-                // for (let key in registers) {
-                //     if (registers.hasOwnProperty(key)) {
-                //         let t = registers[key] as Tramite;
-                //         t.$key = key;
-                //         tramites.push(t);
-                //     }
-                // }
-                // console.log(tramites);
                 resolve(data.key);
             });
         });
+    }
+
+    actualizaTramite($key: string, tramite: Tramite): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.tramitesRef.child($key).update(tramite);
+            resolve({status: 'success'})
+        });
+    }
+
+    actualizarCantidadDeudora($key: string, resto: number){
+        this.tramitesRef.child($key)
+        .update({ cantidad_deudora: resto });
     }
 }

@@ -1,0 +1,71 @@
+<div class="mt-5 animated fadeIn">
+    <div class="row">
+        <div class="col col-md-10">
+            <h2>Detalle del trámite</h2>
+        </div>
+        <div class="col col-md-2">
+            <button type="button"
+            [routerLink]="['/pagos', $key]"
+            class="btn btn-primary text-right">Ver Abonos</button>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="row mt-5 animated fadeIn" *ngIf="loading">
+        <div class="col text-center">
+            <i class="fa fa-sync-alt fa-spin fa-5x"></i>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="mt-2 animated fadeIn" *ngIf="!loading">
+        <form #tramiteForm="ngForm" >
+            <div class="form-group">
+                <label>Nombre</label>
+                <input name="nombre" [(ngModel)]="tramite.nombre" type="text" class="form-control" placeholder="Nombre">
+            </div>
+            <div class="form-group">
+                <label>Apellido Paterno</label>
+                <input [(ngModel)]="tramite.apellido_paterno" name="apellido_paterno"
+                type="text" class="form-control" placeholder="Apellido Paterno">
+            </div>
+            <div class="form-group">
+                <label>Apellido Materno</label>
+                <input [(ngModel)]="tramite.apellido_materno" name="apellido_materno"
+                type="text" class="form-control" placeholder="Apellido Materno">
+            </div>
+            <div class="form-group">
+                <label>Localidad</label>
+                <input name="localidad" [(ngModel)]="tramite.localidad" type="text" class="form-control" placeholder="Localidad">
+            </div>
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input [(ngModel)]="tramite.telefono" name="tramite.telefono" type="text" class="form-control" placeholder="Teléfono">
+            </div>
+            <div class="form-group">
+                <label>Concepto del trámite</label>
+                <input [(ngModel)]="tramite.concepto_tramite" name="concepto_tramite"
+                type="text" class="form-control" placeholder="Concepto del trámite">
+            </div>
+            <div class="form-group">
+                <label>Costo de trámite</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input [(ngModel)]="tramite.costo_tramite" name="costo_tramite"
+                        type="number" class="form-control" placeholder="Costo de trámite"
+                        aria-label="Costro tramite" aria-describedby="basic-addon1">
+                </div>
+            </div>
+        </form>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+            [routerLink]="['/tramites']">Cancelar</button>
+            <button type="button" class="btn btn-primary"
+            (click)="actualizaTramite()">Guardar</button>
+
+        </div>
+    </div>
+</div>

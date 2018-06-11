@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TramiteService } from '../../services/tramite.service';
 import { Tramite } from '../../clases/tramite';
 import { NgForm } from '@angular/forms';
-import { AngularFireList, ChildEvent } from 'angularfire2/database';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,6 +12,7 @@ import { Observable } from 'rxjs';
 export class TramitesComponent implements OnInit {
 
     tramites: Tramite[] = [];
+    tramiteSelected: Tramite;
 
     nombre: string;
     apellido_paterno: string;
@@ -53,6 +53,18 @@ export class TramitesComponent implements OnInit {
                 this.loading = false;
             }
         }).catch(error => console.log(error));
+    }
+
+    deleteTramite(){
+        if (this.tramiteSelected) {
+            console.log('deleting...');
+            this.tramiteService.eliminarTramite(this.tramiteSelected.$key);
+            this.getTramites();
+        }
+    }
+
+    setTramiteForDelete(tramite){
+        this.tramiteSelected = tramite;
     }
 
 }

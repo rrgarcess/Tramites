@@ -27,8 +27,14 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
         ¿Está seguro que desea eliminar el trámite?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar</button>
+        <button type="button"
+        class="btn btn-secondary"
+        data-dismiss="modal">Cancelar</button>
+
+        <button type="button"
+        class="btn btn-primary"
+        data-dismiss="modal"
+        (click)="deleteTramite()">Eliminar</button>
       </div>
     </div>
   </div>
@@ -110,36 +116,48 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
 <!-- Loading -->
 <div class="row mt-5 animated fadeIn" *ngIf="loading">
     <div class="col text-center">
-        <i class="fa fa-sync-alt fa-spin fa-5x"></i>
+        <i class="fa fa-sync-alt fa-spin fa-5x" style="color: white"></i>
     </div>
 </div>
 
 <!-- Tramites list -->
 <div class="mt-2">
-    <div *ngFor="let tramite of tramites | filterByName:termino_busqueda" class="card m-1 animated fadeIn">
+    <div *ngFor="let tramite of tramites | filterByName:termino_busqueda"
+    class="card m-1 animated fadeIn bg-light">
       <div class="card-body">
           <div class="col">
               <div class="row">
-                  <div class="col-lg-11 col-md-10">
-                      <h5 class="card-title">{{ tramite.nombre | capitalize}} {{tramite.apellido_paterno | capitalize}} {{tramite.apellido_materno | capitalize}}</h5>
+                  <div class="col-lg-10 col-md-10 col-sm-12">
+                      <h5 [routerLink]="['/tramite', tramite.$key]"
+                      style="cursor: pointer"
+                      class="card-title editable">{{ tramite.nombre | capitalize}}
+                          {{tramite.apellido_paterno | capitalize}}
+                          {{tramite.apellido_materno | capitalize}}</h5>
                   </div>
-                  <div class="col-lg-1 col-md-2">
-                      <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                          <img src="./../../../assets/images/delete.png" style="width: 22px; height: 22px">
+                  <div class="col-lg-2 col-md-2 col-sm-12">
+                      <button class="btn btn-danger"
+                      style="width: 100%"
+                      (click)="setTramiteForDelete(tramite)"
+                      data-toggle="modal"
+                      data-target="#deleteModal">
+                          <i class="far fa-trash-alt" style="color: white"></i>
                       </button>
                   </div>
               </div>
           </div>
           <div class="col">
               <div class="row mt-2">
-                  <div class="col-lg-11 col-md-6">
+                  <div class="col-lg-10 col-md-10 col-sm-12">
                       <p>
                           Nombre del trámite: {{ tramite.concepto_tramite }}
-                          <span class="badge badge-pill badge-success">$ {{ tramite.costo_tramite | number}}</span>
+                          <span class="badge badge-pill badge-info">$ {{ tramite.costo_tramite | number}}</span>
                       </p>
                   </div>
-                  <div class="col-lg-1 col-md-2">
-                      <button type="button" [routerLink]="['/pagos', tramite.$key]" class="btn btn-primary">Pagos</button>
+                  <div class="col-lg-2 col-md-2 col-sm-12">
+                      <button type="button"
+                      [routerLink]="['/pagos', tramite.$key]"
+                      style="width: 100%"
+                      class="btn btn-primary text-center">Abonos</button>
                   </div>
               </div>
           </div>
