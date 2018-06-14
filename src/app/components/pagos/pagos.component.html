@@ -4,10 +4,22 @@
             <h2>Abonos de <strong class="animated fadeIn">{{ tramiteActivo.nombre | capitalize}}
                 {{tramiteActivo.apellido_paterno | capitalize}}
                 {{tramiteActivo.apellido_materno | capitalize}} </strong></h2>
-            <h5>Nombre del trámite: <strong class="animated fadeIn">{{ tramiteActivo.concepto_tramite }}</strong> </h5>
-            <h5>Precio del trámite: <strong class="animated fadeIn">{{ tramiteActivo.costo_tramite | number}}</strong></h5>
-            <h5>Restante: <strong class="animated fadeIn">{{ tramiteActivo.cantidad_deudora | number}}</strong></h5>
-            <h5>Abonado: <strong class="animated fadeIn">{{ abonado | number }}</strong></h5>
+            <tr>
+                <td><h5>Concepto del trámite:</h5> </td>
+                <td><h5><strong class="animated fadeIn">{{ tramiteActivo.concepto_tramite }}</strong></h5></td>
+            </tr>
+            <tr>
+                <td><h5>Precio del trámite:</h5></td>
+                <td><h5><strong class="animated fadeIn">{{ tramiteActivo.costo_tramite | number}}</strong></h5></td>
+            </tr>
+            <tr>
+                <td><h5>Abonado:</h5> </td>
+                <td><h5><strong class="animated fadeIn">{{ abonado | number }}</strong></h5></td>
+            </tr>
+            <tr>
+                <td><h5>Restante:</h5> </td>
+                <td><h5><strong class="animated fadeIn">{{ tramiteActivo.cantidad_deudora | number}}</strong></h5></td>
+            </tr>
         </div>
         <div class="col-md-3 col-sm-12 col-lg-2">
             <button type="button"

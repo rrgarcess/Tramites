@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 //services
 import { TramiteService } from './services/tramite.service';
@@ -36,8 +38,10 @@ import { TramiteComponent } from './components/tramite/tramite.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
-    RouterModule.forRoot(APP_ROUTES)
+    RouterModule.forRoot(APP_ROUTES),
+    ToastModule.forRoot()
   ],
   providers: [TramiteService, AbonoService],
   bootstrap: [AppComponent]

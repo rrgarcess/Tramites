@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Tramite } from '../../clases/tramite';
 import { TramiteService } from '../../services/tramite.service';
+import { ToastsManager } from 'ng2-toastr';
 
 @Component({
   selector: 'app-tramite',
@@ -15,7 +16,9 @@ export class TramiteComponent implements OnInit {
     loading: boolean = true;
 
     constructor(private route: ActivatedRoute,
-                private tramiteService: TramiteService) {
+                private tramiteService: TramiteService,
+                public toastr: ToastsManager, vcr: ViewContainerRef) {
+        this.toastr.setRootViewContainerRef(vcr);
 
         this.route.params
         .subscribe(params => {
@@ -38,8 +41,11 @@ export class TramiteComponent implements OnInit {
     actualizaTramite(){
         this.tramiteService.actualizaTramite(this.$key, this.tramite)
         .then((response) => {
+            this.toastr.success('Guardado', 'Se ha guardado correctamente.');
+            console.log('Se ha guardado correctamente.');
             if (response.status == 'succes') {
-                // this.tramiteService.actualizarCantidadDeudora(this.$key, )
+
+
             }
         });
     }
