@@ -6,8 +6,6 @@
         <div class="text-right">
             <button type="button" class="btn btn-primary" data-toggle="modal"
             data-target=".bd-example-modal-lg">Nuevo</button>
-
-            <!-- <button type="button" class="btn btn-primary" (click)="getTramites()">Cargar</button> -->
         </div>
     </div>
 </div>
@@ -40,7 +38,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
   </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1"
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="main-form"
     role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered ">
     <div class="modal-content">
@@ -94,9 +92,12 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
         </div>
         <div class="modal-footer">
             <button type="button"  data-dismiss="modal" class="btn btn-secondary">Cancelar</button>
-            <button type="button" (click)="guardarTramite(tramiteForm)"
+            <button type="button"
                 [disabled]="!(nombre && apellido_paterno && apellido_materno && costo_tramite && concepto_tramite)"
-                data-dismiss="modal" class="btn btn-primary">Guardar</button>
+                data-target="#main-form"
+                data-dismiss="modal"
+                (click)="guardarTramite(tramiteForm)"
+                class="btn btn-primary">Guardar</button>
 
         </div>
     </div>

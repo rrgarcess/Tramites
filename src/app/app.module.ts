@@ -23,6 +23,7 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderPipe } from './pipes/order.pipe';
 import { TramiteComponent } from './components/tramite/tramite.component';
+import { FolioPipe } from './pipes/folio.pipe';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { TramiteComponent } from './components/tramite/tramite.component';
     CapitalizePipe,
     FilterPipe,
     OrderPipe,
-    TramiteComponent
+    TramiteComponent,
+    FolioPipe
   ],
   imports: [
     BrowserModule,

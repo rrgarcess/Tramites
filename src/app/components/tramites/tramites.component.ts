@@ -41,6 +41,7 @@ export class TramitesComponent implements OnInit {
                 if (response.status === 'success') {
                     console.log('dentro del success');
                     this.getTramites();
+                    tramite.reset();
                 }
             }).catch( error => console.log(error));
     }

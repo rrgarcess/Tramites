@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Tramite } from '../../clases/tramite';
 import { TramiteService } from '../../services/tramite.service';
 import { ToastsManager } from 'ng2-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tramite',
@@ -16,9 +17,8 @@ export class TramiteComponent implements OnInit {
     loading: boolean = true;
 
     constructor(private route: ActivatedRoute,
-                private tramiteService: TramiteService,
-                public toastr: ToastsManager, vcr: ViewContainerRef) {
-        this.toastr.setRootViewContainerRef(vcr);
+                private router: Router,
+                private tramiteService: TramiteService) {
 
         this.route.params
         .subscribe(params => {
@@ -41,12 +41,9 @@ export class TramiteComponent implements OnInit {
     actualizaTramite(){
         this.tramiteService.actualizaTramite(this.$key, this.tramite)
         .then((response) => {
-            this.toastr.success('Guardado', 'Se ha guardado correctamente.');
             console.log('Se ha guardado correctamente.');
-            if (response.status == 'succes') {
-
-
-            }
+            this.router.navigateByUrl('/tramites');
+            console.log(response)
         });
     }
 

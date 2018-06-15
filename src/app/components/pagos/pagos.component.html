@@ -53,13 +53,12 @@
         <div *ngFor="let abono of abonos | orderByDate" class="col col-sm-12 col-md-12 col-lg-6">
             <div class="card m-1 bg-light">
               <div class="card-body">
-                <h3 class="card-title">
+                <h4 class="card-title">
                     <div class="row">
-                        <div class="col-10">
-                            Abono: ${{ abono.cantidad_abonada | number }}
+                        <div class="col-8">
+                            Folio: {{ abono.folio | folio:'5' }}
                         </div>
-                        <div class="col-2 text-right">
-                            <!-- edit button -->
+                        <div class="col-2">
                             <button class="btn btn-primary"
                             (click)="cargarAbono(abono.$key)"
                             style="width: 100%"
@@ -68,8 +67,21 @@
                                 <i class="far fa-edit" style="color: white"></i>
                             </button>
                         </div>
+                        <div class="col-2 text-right">
+                            <!-- print button -->
+                            <button class="btn btn-primary"
+                            (click)="createPdf()"
+                            style="width: 100%">
+                                <i class="fas fa-print" style="color: white"></i>
+                            </button>
+                        </div>
                     </div>
-                </h3>
+                </h4>
+                <div class="row">
+                    <div class="col-md-5">
+                        Abono: ${{ abono.cantidad_abonada | number }}
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-5">
                         {{abono.fecha | date}}

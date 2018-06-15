@@ -5,7 +5,7 @@ import { Tramite } from '../../clases/tramite';
 import { Abono } from '../../clases/abono';
 import { NgForm } from '@angular/forms';
 import { AbonoService } from '../../services/abono.service';
-import { $ } from 'protractor';
+import * as jsPdf from 'jspdf';
 
 @Component({
   selector: 'pagos',
@@ -107,6 +107,14 @@ export class PagosComponent implements OnInit, OnDestroy {
             this.tramiteActivo = data;
             // this.cargarAbonos();
         });
+    }
+
+    createPdf(){
+        let doc = new jsPdf();
+
+        doc.text('Hola PDF', 10, 10);
+
+        doc.save('test.pdf');
     }
 
     ngOnDestroy(): void {
