@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { AbonoService } from '../../services/abono.service';
 import * as jsPdf from 'jspdf';
 import { PdfService } from '../../services/pdf.service';
+import { ContentPDF } from '../../model/content';
 
 @Component({
   selector: 'pagos',
@@ -114,7 +115,15 @@ export class PagosComponent implements OnInit, OnDestroy {
     }
 
     createPdf(){
-        this.pdfService._createPDF();
+        let content: ContentPDF = {
+            nombre_tramitante: `${this.tramiteActivo.nombre} ${this.tramiteActivo.apellido_paterno} ${this.tramiteActivo.apellido_materno}`,
+            tramite: this.tramiteActivo.concepto_tramite,
+            cantidad: this.tramiteActivo.costo_tramite,
+            lugar: this.tramiteActivo.localidad,
+            fecha: '17 días de Junio del 2018'
+        };
+
+        this.pdfService.crearPDF('test.pdf', content);
     }
 
     ngOnDestroy(): void {
