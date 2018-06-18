@@ -3,7 +3,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 //services
 import { TramiteService } from './services/tramite.service';
@@ -24,6 +23,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { OrderPipe } from './pipes/order.pipe';
 import { TramiteComponent } from './components/tramite/tramite.component';
 import { FolioPipe } from './pipes/folio.pipe';
+import { PdfService } from './services/pdf.service';
 
 
 @NgModule({
@@ -42,10 +42,9 @@ import { FolioPipe } from './pipes/folio.pipe';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    RouterModule.forRoot(APP_ROUTES),
-    ToastModule.forRoot()
+    RouterModule.forRoot(APP_ROUTES)
   ],
-  providers: [TramiteService, AbonoService],
+  providers: [TramiteService, AbonoService, PdfService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

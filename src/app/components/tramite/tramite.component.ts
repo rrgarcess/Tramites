@@ -2,7 +2,6 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Tramite } from '../../clases/tramite';
 import { TramiteService } from '../../services/tramite.service';
-import { ToastsManager } from 'ng2-toastr';
 import { Router } from '@angular/router';
 
 @Component({

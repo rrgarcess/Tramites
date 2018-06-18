@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TramiteService } from '../../services/tramite.service';
 import { Tramite } from '../../clases/tramite';
@@ -6,6 +6,7 @@ import { Abono } from '../../clases/abono';
 import { NgForm } from '@angular/forms';
 import { AbonoService } from '../../services/abono.service';
 import * as jsPdf from 'jspdf';
+import { PdfService } from '../../services/pdf.service';
 
 @Component({
   selector: 'pagos',
@@ -14,20 +15,23 @@ import * as jsPdf from 'jspdf';
 })
 export class PagosComponent implements OnInit, OnDestroy {
 
-     subscriber: any;
-     tramiteActivo: Tramite = new Tramite();
-     abonoActivo: Abono = new Abono();
-     abonos: Abono[] = [];
-     abonado: number = 0;
+    @ViewChild('printable') element: ElementRef;
 
-     fecha: any;
-     cantidad_abonada: number;
-     descripcion: string = "";
-     loading: boolean = true;
+    subscriber: any;
+    tramiteActivo: Tramite = new Tramite();
+    abonoActivo: Abono = new Abono();
+    abonos: Abono[] = [];
+    abonado: number = 0;
+
+    fecha: any;
+    cantidad_abonada: number;
+    descripcion: string = "";
+    loading: boolean = true;
 
     constructor(private route: ActivatedRoute,
                 private tramiteService: TramiteService,
-                private abonosService: AbonoService) {
+                private abonosService: AbonoService,
+                private pdfService: PdfService) {
     }
 
     ngOnInit() {
@@ -110,11 +114,7 @@ export class PagosComponent implements OnInit, OnDestroy {
     }
 
     createPdf(){
-        let doc = new jsPdf();
-
-        doc.text('Hola PDF', 10, 10);
-
-        doc.save('test.pdf');
+        this.pdfService._createPDF();
     }
 
     ngOnDestroy(): void {
