@@ -8,6 +8,8 @@ import { AbonoService } from '../../services/abono.service';
 import * as jsPdf from 'jspdf';
 import { PdfService } from '../../services/pdf.service';
 import { ContentPDF } from '../../model/content';
+import { CapitalizePipe } from '../../pipes/capitalize.pipe';
+import { DecimalPipe, DeprecatedDecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'pagos',
@@ -115,8 +117,15 @@ export class PagosComponent implements OnInit, OnDestroy {
     }
 
     createPdf(){
+        let capitalize = new CapitalizePipe();
+        // let number = new DeprecatedDecimalPipe('0.0');
+
         let content: ContentPDF = {
-            nombre_tramitante: `${this.tramiteActivo.nombre} ${this.tramiteActivo.apellido_paterno} ${this.tramiteActivo.apellido_materno}`,
+            nombre_tramitante: capitalize.transform(this.tramiteActivo.nombre)
+            +' '+
+            capitalize.transform(this.tramiteActivo.apellido_paterno)
+            +' '+
+            capitalize.transform(this.tramiteActivo.apellido_materno),
             tramite: this.tramiteActivo.concepto_tramite,
             cantidad: this.tramiteActivo.costo_tramite,
             lugar: this.tramiteActivo.localidad,

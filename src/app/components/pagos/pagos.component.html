@@ -70,6 +70,7 @@
                         <div class="col-2 text-right">
                             <!-- print button -->
                             <button class="btn btn-primary"
+                            (click)="cargarAbono(abono.$key)"
                             data-toggle="modal"
                             data-target="#printModal"
                             style="width: 100%">
@@ -154,30 +155,29 @@ tabindex="-1" role="dialog" aria-labelledby="printModal" aria-hidden="true">
       <div class="modal-body">
           <div id="printable" #printable>
               <div class="col">
-                  <div class="row">
-                      <h5>ABONO POR $ {{1000 | number:'0.2'}}</h5>
-                  </div>
-                  <br>
-                  <div class="row">
-                      <h5>RECIBÍ DE 'NOMBRE DEL TRAMITANTE', LA CANTIDAD DE $ {{1000 | number:'0.2'}}
-                      <strong>(UN MIL PESOS 00/100 M.N.)</strong> POR CONCEPTO DE APORTACIÓN PARA
-                      'NOMBRE DEL TRÁMITE'.</h5>
-                  </div>
-                  <br>
-                  <div class="row">
-                      <h5>EN 'LUGAR DE EMISIÓN DEL ABONO' A LOS 'FECHA DEL ABONO'</h5>
-                  </div>
-                  <br>
-                  <div class="text-center">
-                      <h5><strong>RECIBÍ</strong></h5>
-                  </div>
-                  <br><br>
-                  <div class="text-center">
-                      <h5>________________________</h5>
-                  </div>
                   <div class="text-center">
                       <h5>C. SERGIO ABREGO PEÑA.</h5>
                   </div>
+                  <br>
+                  <br>
+                  <div class="row">
+                      <h5>Recibí de: {{ tramiteActivo.nombre | capitalize}}
+                          {{tramiteActivo.apellido_paterno | capitalize}}
+                          {{tramiteActivo.apellido_materno | capitalize}}.</h5>
+                  </div>
+                  <br>
+                  <div class="row">
+                      <h5>La cantidad de: $ {{ abonoActivo.cantidad_abonada | number }}</h5>
+                  </div>
+                  <br>
+                  <div class="row">
+                      <h5>Concepto de: {{ tramiteActivo.concepto_tramite }}</h5>
+                  </div>
+                  <br>
+                  <div class="row">
+                      <h5>En {{ tramiteActivo.localidad }} a los {{abonoActivo.fecha | dateToText }}</h5>
+                  </div>
+                  <br>
               </div>
 
           </div>
