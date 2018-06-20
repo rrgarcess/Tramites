@@ -18,12 +18,12 @@ export class PdfService {
 
         doc.setFontType('normal');
         doc.text(`Recibí de: ${ content.nombre_tramitante }`, 15, 60);
-        doc.text(`La cantidad de: $ ${ content.cantidad } (DOS MIL QUINIENTO PESOS 00/100 MN)`, 15, 70);
+        doc.text(`La cantidad de: $ ${ content.cantidad }`, 15, 70);
         doc.text(`Concepto de: ${ content.tramite }`, 15, 80);
         doc.text(`En ${ content.lugar || '' } a los ${ content.fecha }`, 15, 90);
         //----------------------------------------------------------------------
         doc.text(`Recibí de: ${ content.nombre_tramitante }`, 15, 60 + padding);
-        doc.text(`La cantidad de: $ ${ content.cantidad } (DOS MIL QUINIENTO PESOS 00/100 MN)`, 15, 70 + padding);
+        doc.text(`La cantidad de: $ ${ content.cantidad }`, 15, 70 + padding);
         doc.text(`Concepto de: ${ content.tramite }`, 15, 80 + padding);
         doc.text(`En ${ content.lugar || '' } a los ${ content.fecha }`, 15, 90 + padding);
 
@@ -41,30 +41,5 @@ export class PdfService {
         doc.text('ASESOR - GESTOR', 75, 31 + padding);
 
         doc.save(name);
-    }
-
-    __createPDF(nativeContent){
-        // let doc = new jsPDF();
-        //
-        // let handler = {
-        //     '#editor': (element, renderer) => {
-        //         return true;
-        //     }
-        // }
-        //
-        // let content = nativeContent.nativeElement;
-        //
-        // doc.addHTML(content, () => {
-        //     console.log('saved')
-        // });
-    }
-
-    createPDF(nativeContent, name){
-    }
-
-    _createPDF(){
-        // return xepOnline.Formatter.Format('printable', {
-        //     render: 'download'
-        // });
     }
 }

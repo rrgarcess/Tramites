@@ -25,6 +25,7 @@ import { TramiteComponent } from './components/tramite/tramite.component';
 import { FolioPipe } from './pipes/folio.pipe';
 import { PdfService } from './services/pdf.service';
 import { DateToTextPipe } from './pipes/date-to-text.pipe';
+import { NumberToTextPipe } from './pipes/number-to-text.pipe';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { DateToTextPipe } from './pipes/date-to-text.pipe';
     OrderPipe,
     TramiteComponent,
     FolioPipe,
-    DateToTextPipe
+    DateToTextPipe,
+    NumberToTextPipe
   ],
   imports: [
     BrowserModule,

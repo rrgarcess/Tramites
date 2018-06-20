@@ -10,6 +10,8 @@ import { PdfService } from '../../services/pdf.service';
 import { ContentPDF } from '../../model/content';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { DecimalPipe, DeprecatedDecimalPipe } from '@angular/common';
+import { DateToTextPipe } from '../../pipes/date-to-text.pipe';
+import { NumberToTextPipe } from '../../pipes/number-to-text.pipe';
 
 @Component({
   selector: 'pagos',
@@ -118,6 +120,8 @@ export class PagosComponent implements OnInit, OnDestroy {
 
     createPdf(){
         let capitalize = new CapitalizePipe();
+        let dateToText = new DateToTextPipe()
+        let numberToText = new NumberToTextPipe()
         // let number = new DeprecatedDecimalPipe('0.0');
 
         let content: ContentPDF = {
@@ -127,12 +131,12 @@ export class PagosComponent implements OnInit, OnDestroy {
             +' '+
             capitalize.transform(this.tramiteActivo.apellido_materno),
             tramite: this.tramiteActivo.concepto_tramite,
-            cantidad: this.tramiteActivo.costo_tramite,
+            cantidad: numberToText.transform(this.abonoActivo.cantidad_abonada),
             lugar: this.tramiteActivo.localidad,
-            fecha: '17 días de Junio del 2018'
+            fecha: dateToText.transform(this.abonoActivo.fecha)
         };
 
-        this.pdfService.crearPDF('test.pdf', content);
+        this.pdfService.crearPDF(`${this.tramiteActivo.concepto_tramite}-${this.abonoActivo.fecha}.pdf`, content);
     }
 
     ngOnDestroy(): void {
