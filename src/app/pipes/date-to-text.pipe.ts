@@ -13,7 +13,6 @@ export class DateToTextPipe implements PipeTransform {
         let year = d.getFullYear();
 
         value = this.getTextDay(day) + this.getTextMonth(month) + this.getTextYear(year);
-        console.log(value);
         return value;
     }
 

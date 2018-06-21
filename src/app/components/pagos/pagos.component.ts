@@ -120,9 +120,8 @@ export class PagosComponent implements OnInit, OnDestroy {
 
     createPdf(){
         let capitalize = new CapitalizePipe();
-        let dateToText = new DateToTextPipe()
-        let numberToText = new NumberToTextPipe()
-        // let number = new DeprecatedDecimalPipe('0.0');
+        let dateToText = new DateToTextPipe();
+        let numberToText = new NumberToTextPipe();
 
         let content: ContentPDF = {
             nombre_tramitante: capitalize.transform(this.tramiteActivo.nombre)
