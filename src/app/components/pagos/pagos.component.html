@@ -46,6 +46,7 @@
     <h3 class="display-3 text-secondary text-center">No hay ningún abono registrado</h3>
 </div>
 
+<!-- Cards -->
 <div class="row animated fadeIn">
     <div class="col">
         <div class="row">
@@ -130,7 +131,8 @@ role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary"
+        data-dismiss="modal" (click)="cancel()">Cancelar</button>
         <button type="submit" class="btn btn-primary"
         data-dismiss="modal"
         (click)="registrarAbono()">
@@ -161,21 +163,39 @@ tabindex="-1" role="dialog" aria-labelledby="printModal" aria-hidden="true">
                   <br>
                   <br>
                   <div class="row">
-                      <h5>Recibí de: {{ tramiteActivo.nombre | capitalize}}
-                          {{tramiteActivo.apellido_paterno | capitalize}}
-                          {{tramiteActivo.apellido_materno | capitalize}}.</h5>
+                      <div class="col">
+                          <h5>Recibí de: {{ tramiteActivo.nombre | capitalize}}
+                              {{tramiteActivo.apellido_paterno | capitalize}}
+                              {{tramiteActivo.apellido_materno | capitalize}}.</h5>
+                      </div>
                   </div>
                   <br>
                   <div class="row">
-                      <h5>La cantidad de: $ {{ abonoActivo.cantidad_abonada | numberToText }}</h5>
+                      <div class="col">
+                          <h5>La cantidad de: $ {{ abonoActivo.cantidad_abonada | numberToText }}</h5>
+                      </div>
                   </div>
                   <br>
                   <div class="row">
-                      <h5>Concepto de: {{ tramiteActivo.concepto_tramite }}</h5>
+                      <div class="col">
+                          <h5>Concepto de: {{ tramiteActivo.concepto_tramite }}</h5>
+                      </div>
                   </div>
                   <br>
                   <div class="row">
-                      <h5>En {{ tramiteActivo.localidad }} a los {{abonoActivo.fecha | dateToText }}</h5>
+                      <div class="col-1">
+                          <h5>En </h5>
+                      </div>
+                      <div class="col-5">
+                        <input type="text"
+                        [(ngModel)]="tramiteActivo.localidad"
+                        class="form-control"
+                        value="{{ tramiteActivo.localidad }}"
+                        placeholder="Localidad o municipio">
+                      </div>
+                      <div class="col-6">
+                          <h5> a los {{abonoActivo.fecha | dateToText }}</h5>
+                      </div>
                   </div>
                   <br>
               </div>
@@ -183,7 +203,8 @@ tabindex="-1" role="dialog" aria-labelledby="printModal" aria-hidden="true">
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary"
+        data-dismiss="modal" (click)="cancel();">Cancelar</button>
 
         <button type="submit" class="btn btn-primary"
         data-dismiss="modal" (click)="createPdf()">Imprimir</button>

@@ -129,17 +129,27 @@ export class PagosComponent implements OnInit, OnDestroy {
             capitalize.transform(this.tramiteActivo.apellido_paterno)
             +' '+
             capitalize.transform(this.tramiteActivo.apellido_materno),
-            tramite: this.tramiteActivo.concepto_tramite,
+            tramite: this.tramiteActivo.concepto_tramite.length > 27 ? this.formatTramite() : this.tramiteActivo.concepto_tramite,
             cantidad: numberToText.transform(this.abonoActivo.cantidad_abonada),
             lugar: this.tramiteActivo.localidad,
             fecha: dateToText.transform(this.abonoActivo.fecha)
         };
 
         this.pdfService.crearPDF(`${this.tramiteActivo.concepto_tramite}-${this.abonoActivo.fecha}.pdf`, content);
+        this.abonoActivo = new Abono();
+    }
+
+    formatTramite(){
+        let str = this.tramiteActivo.concepto_tramite.substring(0, 25);
+        return `${ str }-\n${ this.tramiteActivo.concepto_tramite.substring(25) }`;
     }
 
     ngOnDestroy(): void {
         this.subscriber.unsubscribe();
+    }
+
+    cancel(){
+        this.abonoActivo = new Abono();
     }
 
 }
