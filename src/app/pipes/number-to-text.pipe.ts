@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class NumberToTextPipe implements PipeTransform {
 
     transform(number: number): any {
-        number = 14;
         let text: string, unidad, decena, centena, millar;
 
         unidad = (number % 10) | 0;
