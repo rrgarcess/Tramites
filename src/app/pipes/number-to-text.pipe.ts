@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class NumberToTextPipe implements PipeTransform {
 
     transform(number: number): any {
+        // number = 10000;
         let text: string, unidad, decena, centena, millar;
 
         unidad = (number % 10) | 0;
@@ -14,18 +15,21 @@ export class NumberToTextPipe implements PipeTransform {
         millar = ((number - centena - decena - unidad) % 10000) | 0;
 
         text = millar ? this.getThousandText(millar) + ' ' : '';
-        text += centena ? this.getHundredText(centena) + ' ' : '';
-        text += decena ? this.getTenText(decena) + ' ': '';
-        // text += (decena && decena > 10) ? this.getSpetialTenText(decena) + ' ': '';
-        text += (decena && unidad) ? ' Y ': '';
-        text += unidad ? this.getUnitText(unidad) + ' ': '';
+        text += centena ? this.getHundredText(centena, decena, unidad) + ' ' : '';
+        text += decena ? this.getTenText(decena, unidad) + ' ': '';
+        text += (decena && unidad && (decena != 20 && decena != 10)) ? ' Y ': '';
+        text += unidad ? this.getUnitText(unidad, decena) + ' ': '';
 
         text = text.length > 25 ? text + '\nPESOS 00/100 MN)' : text + ' PESOS 00/100 MN)';
 
         return `${number} (${text}`;
     }
 
-    getUnitText(unit){
+    getUnitText(unit, ten?){
+
+        if (ten && (ten == 20 || ten == 10)) {
+            return '';
+        }
 
         switch(unit){
             case 1:
@@ -51,63 +55,67 @@ export class NumberToTextPipe implements PipeTransform {
         }
     }
 
+    getTenText(ten, unit){
+
+        if (ten == 10 && unit >= 1) {
+            return this.getSpetialTenText(ten + unit);
+        }
+
+        switch(ten){
+            case 10:
+            return 'DIEZ';
+            case 20:
+            return unit > 0 ? 'VEINTI' + this.getUnitText(unit) : 'VEINTE';
+            case 30:
+            return 'TREINTA';
+            case 40:
+            return 'CUARENTA';
+            case 50:
+            return 'CINCUENTA';
+            case 60:
+            return 'SESENTA';
+            case 70:
+            return 'SETENTA';
+            case 80:
+            return 'OCHENTA';
+            case 90:
+            return 'NOVENTA';
+            default:
+            return '';
+        }
+    }
+
     getSpetialTenText(ten){
 
         switch(ten){
             case 11:
-                return 'ONCE';
+            return 'ONCE';
             case 12:
-                return 'DOCE';
+            return 'DOCE';
             case 13:
-                return 'TRECE';
+            return 'TRECE';
             case 14:
-                return 'CATORCE';
+            return 'CATORCE';
             case 15:
-                return 'QUINCE';
+            return 'QUINCE';
             case 16:
-                return 'DIECISÉIS';
+            return 'DIECISÉIS';
             case 17:
-                return 'DIECISIETE';
+            return 'DIECISIETE';
             case 18:
-                return 'DIECIOCHO';
+            return 'DIECIOCHO';
             case 19:
-                return 'CIECINUEVE';
+            return 'DIECINUEVE';
             default:
-                return '';
+            return '';
         }
     }
 
-    getTenText(ten){
-
-        switch(ten){
-            case 10:
-                return 'DIEZ';
-            case 20:
-                return 'VEINTE';
-            case 30:
-                return 'TREINTA';
-            case 40:
-                return 'CUARENTA';
-            case 50:
-                return 'CINCUENTA';
-            case 60:
-                return 'SESENTA';
-            case 70:
-                return 'SETENTA';
-            case 80:
-                return 'OCHENTA';
-            case 90:
-                return 'NOVENTA';
-            default:
-                return '';
-        }
-    }
-
-    getHundredText(hundred){
+    getHundredText(hundred, ten?, unit?){
 
         switch(hundred){
             case 100:
-                return 'CIEN';
+                return (ten || unit) ? 'CIENTO' : 'CIEN';
             case 200:
                 return 'DOCIENTOS';
             case 300:
