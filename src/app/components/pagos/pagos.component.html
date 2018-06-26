@@ -1,214 +1,217 @@
-<div class="col">
-    <div class="row mt-5">
-        <div class="col-md-9 col-sm-12 col-lg-10">
-            <h2>Abonos de <strong class="animated fadeIn">{{ tramiteActivo.nombre | capitalize}}
-                {{tramiteActivo.apellido_paterno | capitalize}}
-                {{tramiteActivo.apellido_materno | capitalize}} </strong></h2>
-            <tr>
-                <td><h5>Concepto del trámite:</h5> </td>
-                <td><h5><strong class="animated fadeIn">{{ tramiteActivo.concepto_tramite }}</strong></h5></td>
-            </tr>
-            <tr>
-                <td><h5>Precio del trámite:</h5></td>
-                <td><h5><strong class="animated fadeIn">{{ tramiteActivo.costo_tramite | number}}</strong></h5></td>
-            </tr>
-            <tr>
-                <td><h5>Abonado:</h5> </td>
-                <td><h5><strong class="animated fadeIn">{{ abonado | number }}</strong></h5></td>
-            </tr>
-            <tr>
-                <td><h5>Restante:</h5> </td>
-                <td><h5><strong class="animated fadeIn">{{ tramiteActivo.cantidad_deudora | number}}</strong></h5></td>
-            </tr>
-        </div>
-        <div class="col-md-3 col-sm-12 col-lg-2">
-            <button type="button"
-            style="width: 100%"
-             class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              Agregar Abono
-            </button>
-        </div>
-    </div>
-</div>
-
-
-<!-- Loading -->
-<div class="row mt-5 animated fadeIn" *ngIf="loading">
-    <div class="col text-center">
-        <i class="fa fa-sync-alt fa-spin fa-5x" style="color: black"></i>
-    </div>
-</div>
-
-<!-- Show if does not exist tramites -->
-<div class="jumbotron fadeInDown"
-    *ngIf="!(abonos.length > 0) && !loading"
-    style="margin-top: 10px;">
-    <h3 class="display-3 text-secondary text-center">No hay ningún abono registrado</h3>
-</div>
-
-<!-- Cards -->
-<div class="row animated fadeIn">
+<nav-menu></nav-menu>
+<div class="container">
     <div class="col">
-        <div class="row">
+        <div class="row mt-5">
+            <div class="col-md-9 col-sm-12 col-lg-10">
+                <h2>Abonos de <strong class="animated fadeIn">{{ tramiteActivo.nombre | capitalize}}
+                    {{tramiteActivo.apellido_paterno | capitalize}}
+                    {{tramiteActivo.apellido_materno | capitalize}} </strong></h2>
+                <tr>
+                    <td><h5>Concepto del trámite:</h5> </td>
+                    <td><h5><strong class="animated fadeIn">{{ tramiteActivo.concepto_tramite }}</strong></h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Precio del trámite:</h5></td>
+                    <td><h5><strong class="animated fadeIn">{{ tramiteActivo.costo_tramite | number}}</strong></h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Abonado:</h5> </td>
+                    <td><h5><strong class="animated fadeIn">{{ abonado | number }}</strong></h5></td>
+                </tr>
+                <tr>
+                    <td><h5>Restante:</h5> </td>
+                    <td><h5><strong class="animated fadeIn">{{ tramiteActivo.cantidad_deudora | number}}</strong></h5></td>
+                </tr>
+            </div>
+            <div class="col-md-3 col-sm-12 col-lg-2">
+                <button type="button"
+                style="width: 100%"
+                 class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  Agregar Abono
+                </button>
+            </div>
+        </div>
+    </div>
 
-        <div *ngFor="let abono of abonos | orderByDate" class="col col-sm-12 col-md-12 col-lg-6">
-            <div class="card m-1 bg-light">
-              <div class="card-body">
-                <h4 class="card-title">
+
+    <!-- Loading -->
+    <div class="row mt-5 animated fadeIn" *ngIf="loading">
+        <div class="col text-center">
+            <i class="fa fa-sync-alt fa-spin fa-5x" style="color: black"></i>
+        </div>
+    </div>
+
+    <!-- Show if does not exist tramites -->
+    <div class="jumbotron fadeInDown"
+        *ngIf="!(abonos.length > 0) && !loading"
+        style="margin-top: 10px;">
+        <h3 class="display-3 text-secondary text-center">No hay ningún abono registrado</h3>
+    </div>
+
+    <!-- Cards -->
+    <div class="row animated fadeIn">
+        <div class="col">
+            <div class="row">
+
+            <div *ngFor="let abono of abonos | orderByDate" class="col col-sm-12 col-md-12 col-lg-6">
+                <div class="card m-1 bg-light">
+                  <div class="card-body">
+                    <h4 class="card-title">
+                        <div class="row">
+                            <div class="col-8">
+                                Folio: {{ abono.folio | folio:'5' }}
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-primary"
+                                (click)="cargarAbono(abono.$key)"
+                                style="width: 100%"
+                                data-toggle="modal"
+                                data-target="#exampleModal">
+                                    <i class="far fa-edit" style="color: white"></i>
+                                </button>
+                            </div>
+                            <div class="col-2 text-right">
+                                <!-- print button -->
+                                <button class="btn btn-primary"
+                                (click)="cargarAbono(abono.$key)"
+                                data-toggle="modal"
+                                data-target="#printModal"
+                                style="width: 100%">
+                                    <i class="fas fa-print" style="color: white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </h4>
                     <div class="row">
-                        <div class="col-8">
-                            Folio: {{ abono.folio | folio:'5' }}
-                        </div>
-                        <div class="col-2">
-                            <button class="btn btn-primary"
-                            (click)="cargarAbono(abono.$key)"
-                            style="width: 100%"
-                            data-toggle="modal"
-                            data-target="#exampleModal">
-                                <i class="far fa-edit" style="color: white"></i>
-                            </button>
-                        </div>
-                        <div class="col-2 text-right">
-                            <!-- print button -->
-                            <button class="btn btn-primary"
-                            (click)="cargarAbono(abono.$key)"
-                            data-toggle="modal"
-                            data-target="#printModal"
-                            style="width: 100%">
-                                <i class="fas fa-print" style="color: white"></i>
-                            </button>
+                        <div class="col-md-5">
+                            Abono: ${{ abono.cantidad_abonada | number }}
                         </div>
                     </div>
-                </h4>
-                <div class="row">
-                    <div class="col-md-5">
-                        Abono: ${{ abono.cantidad_abonada | number }}
+                    <div class="row">
+                        <div class="col-md-5">
+                            {{abono.fecha | date}}
+                        </div>
+                        <div class="col-md-7 text-right">
+                            <p>{{ abono.descripcion }} &nbsp;</p>
+                        </div>
                     </div>
+                  </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        {{abono.fecha | date}}
-                    </div>
-                    <div class="col-md-7 text-right">
-                        <p>{{ abono.descripcion }} &nbsp;</p>
-                    </div>
-                </div>
-              </div>
+            </div>
             </div>
         </div>
-        </div>
     </div>
-</div>
 
-<!-- Modal -->
-<div class="modal" id="exampleModal" tabindex="-1"
-role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Agregar Abono</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form #abonoForm="ngForm">
-            <div class="form-group">
-              <label>Fecha</label>
-              <input type="date" [(ngModel)]="abonoActivo.fecha" name="fecha"
-              class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label>Cantidad a abonar</label>
-              <input type="number" [(ngModel)]="abonoActivo.cantidad_abonada"
-              name="cantidad_abonada" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label>Descripción (opcional)</label>
-              <input type="text" [(ngModel)]="abonoActivo.descripcion"
-              name="descripcion" class="form-control">
-            </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"
-        data-dismiss="modal" (click)="cancel()">Cancelar</button>
-        <button type="submit" class="btn btn-primary"
-        data-dismiss="modal"
-        (click)="registrarAbono()">
-        <span *ngIf="!abonoActivo.$key">Abonar</span>
-        <span *ngIf="abonoActivo.$key">Actualizar</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="printModal"
-tabindex="-1" role="dialog" aria-labelledby="printModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Imprimir Abono</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
-      <div class="modal-body">
-          <div id="printable" #printable>
-              <div class="col">
-                  <div class="text-center">
-                      <h5>C. SERGIO ABREGO PEÑA.</h5>
-                  </div>
-                  <br>
-                  <br>
-                  <div class="row">
-                      <div class="col">
-                          <h5>Recibí de: {{ tramiteActivo.nombre | capitalize}}
-                              {{tramiteActivo.apellido_paterno | capitalize}}
-                              {{tramiteActivo.apellido_materno | capitalize}}.</h5>
-                      </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                      <div class="col">
-                          <h5>La cantidad de: $ {{ abonoActivo.cantidad_abonada | numberToText }}</h5>
-                      </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                      <div class="col">
-                          <h5>Concepto de: {{ tramiteActivo.concepto_tramite }}</h5>
-                      </div>
-                  </div>
-                  <br>
-                  <div class="row">
-                      <div class="col-1">
-                          <h5>En </h5>
-                      </div>
-                      <div class="col-5">
-                        <input type="text"
-                        [(ngModel)]="tramiteActivo.localidad"
-                        class="form-control"
-                        value="{{ tramiteActivo.localidad }}"
-                        placeholder="Localidad o municipio">
-                      </div>
-                      <div class="col-6">
-                          <h5> a los {{abonoActivo.fecha | dateToText }}</h5>
-                      </div>
-                  </div>
-                  <br>
-              </div>
-
+    <!-- Modal -->
+    <div class="modal" id="exampleModal" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agregar Abono</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"
-        data-dismiss="modal" (click)="cancel();">Cancelar</button>
-
-        <button type="submit" class="btn btn-primary"
-        data-dismiss="modal" (click)="createPdf()">Imprimir</button>
+          <div class="modal-body">
+            <form #abonoForm="ngForm">
+                <div class="form-group">
+                  <label>Fecha</label>
+                  <input type="date" [(ngModel)]="abonoActivo.fecha" name="fecha"
+                  class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Cantidad a abonar</label>
+                  <input type="number" [(ngModel)]="abonoActivo.cantidad_abonada"
+                  name="cantidad_abonada" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label>Descripción (opcional)</label>
+                  <input type="text" [(ngModel)]="abonoActivo.descripcion"
+                  name="descripcion" class="form-control">
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+            data-dismiss="modal" (click)="cancel()">Cancelar</button>
+            <button type="submit" class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="registrarAbono()">
+            <span *ngIf="!abonoActivo.$key">Abonar</span>
+            <span *ngIf="abonoActivo.$key">Actualizar</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
+    <div class="modal fade" id="printModal"
+    tabindex="-1" role="dialog" aria-labelledby="printModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Imprimir Abono</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div id="printable" #printable>
+                  <div class="col">
+                      <div class="text-center">
+                          <h5>C. SERGIO ABREGO PEÑA.</h5>
+                      </div>
+                      <br>
+                      <br>
+                      <div class="row">
+                          <div class="col">
+                              <h5>Recibí de: {{ tramiteActivo.nombre | capitalize}}
+                                  {{tramiteActivo.apellido_paterno | capitalize}}
+                                  {{tramiteActivo.apellido_materno | capitalize}}.</h5>
+                          </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                          <div class="col">
+                              <h5>La cantidad de: $ {{ abonoActivo.cantidad_abonada | numberToText }}</h5>
+                          </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                          <div class="col">
+                              <h5>Concepto de: {{ tramiteActivo.concepto_tramite }}</h5>
+                          </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                          <div class="col-1">
+                              <h5>En </h5>
+                          </div>
+                          <div class="col-5">
+                            <input type="text"
+                            [(ngModel)]="tramiteActivo.localidad"
+                            class="form-control"
+                            value="{{ tramiteActivo.localidad }}"
+                            placeholder="Localidad o municipio">
+                          </div>
+                          <div class="col-6">
+                              <h5> a los {{abonoActivo.fecha | dateToText }}</h5>
+                          </div>
+                      </div>
+                      <br>
+                  </div>
+
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+            data-dismiss="modal" (click)="cancel();">Cancelar</button>
+
+            <button type="submit" class="btn btn-primary"
+            data-dismiss="modal" (click)="createPdf()">Imprimir</button>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>

@@ -2,6 +2,7 @@
 
 #functions
 /functions/node_modules/
+/functions/
 
 # compiled output
 /dist

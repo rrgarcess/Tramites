@@ -1,167 +1,172 @@
-<div class="row mt-5">
-    <div class="col col-lg-10">
-        <h2>Trámites</h2>
-    </div>
-    <div class="col col-lg-2">
-        <div class="text-right">
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-            data-target=".bd-example-modal-lg">Nuevo</button>
+<nav-menu></nav-menu>
+<div class="container">
+
+
+    <div class="row mt-5">
+        <div class="col col-lg-10">
+            <h2>Trámites</h2>
+        </div>
+        <div class="col col-lg-2">
+            <div class="text-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                data-target=".bd-example-modal-lg">Nuevo</button>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Modals -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Eliminar trámite</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ¿Está seguro que desea eliminar el trámite?
-      </div>
-      <div class="modal-footer">
-        <button type="button"
-        class="btn btn-secondary"
-        data-dismiss="modal">Cancelar</button>
-
-        <button type="button"
-        class="btn btn-primary"
-        data-dismiss="modal"
-        (click)="deleteTramite()">Eliminar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" id="main-form"
-    role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered ">
-    <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Nuevo Trámite</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form #tramiteForm="ngForm" >
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <input name="nombre" [(ngModel)]="nombre" type="text" class="form-control" placeholder="Nombre">
-                </div>
-                <div class="form-group">
-                    <label>Apellido Paterno</label>
-                    <input [(ngModel)]="apellido_paterno" name="apellido_paterno"
-                    type="text" class="form-control" placeholder="Apellido Paterno">
-                </div>
-                <div class="form-group">
-                    <label>Apellido Materno</label>
-                    <input [(ngModel)]="apellido_materno" name="apellido_materno"
-                    type="text" class="form-control" placeholder="Apellido Materno">
-                </div>
-                <div class="form-group">
-                    <label>Localidad</label>
-                    <input name="localidad" [(ngModel)]="localidad" type="text" class="form-control" placeholder="Localidad">
-                </div>
-                <div class="form-group">
-                    <label>Teléfono</label>
-                    <input [(ngModel)]="telefono" name="telefono" type="text" class="form-control" placeholder="Teléfono">
-                </div>
-                <div class="form-group">
-                    <label>Concepto del trámite</label>
-                    <input [(ngModel)]="concepto_tramite" name="concepto_tramite"
-                    type="text" class="form-control" placeholder="Concepto del trámite">
-                </div>
-                <div class="form-group">
-                    <label>Costo de trámite</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                        </div>
-                        <input [(ngModel)]="costo_tramite" name="costo_tramite"
-                            type="number" class="form-control" placeholder="Costo de trámite"
-                            aria-label="Costro tramite" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button"  data-dismiss="modal" class="btn btn-secondary">Cancelar</button>
+    <!-- Modals -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Eliminar trámite</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ¿Está seguro que desea eliminar el trámite?
+          </div>
+          <div class="modal-footer">
             <button type="button"
-                [disabled]="!(nombre && apellido_paterno && apellido_materno && costo_tramite && concepto_tramite)"
-                data-target="#main-form"
-                data-dismiss="modal"
-                (click)="guardarTramite(tramiteForm)"
-                class="btn btn-primary">Guardar</button>
+            class="btn btn-secondary"
+            data-dismiss="modal">Cancelar</button>
 
+            <button type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="deleteTramite()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" id="main-form"
+        role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Nuevo Trámite</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form #tramiteForm="ngForm" >
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input name="nombre" [(ngModel)]="nombre" type="text" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido Paterno</label>
+                        <input [(ngModel)]="apellido_paterno" name="apellido_paterno"
+                        type="text" class="form-control" placeholder="Apellido Paterno">
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido Materno</label>
+                        <input [(ngModel)]="apellido_materno" name="apellido_materno"
+                        type="text" class="form-control" placeholder="Apellido Materno">
+                    </div>
+                    <div class="form-group">
+                        <label>Localidad</label>
+                        <input name="localidad" [(ngModel)]="localidad" type="text" class="form-control" placeholder="Localidad">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input [(ngModel)]="telefono" name="telefono" type="text" class="form-control" placeholder="Teléfono">
+                    </div>
+                    <div class="form-group">
+                        <label>Concepto del trámite</label>
+                        <input [(ngModel)]="concepto_tramite" name="concepto_tramite"
+                        type="text" class="form-control" placeholder="Concepto del trámite">
+                    </div>
+                    <div class="form-group">
+                        <label>Costo de trámite</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input [(ngModel)]="costo_tramite" name="costo_tramite"
+                                type="number" class="form-control" placeholder="Costo de trámite"
+                                aria-label="Costro tramite" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  data-dismiss="modal" class="btn btn-secondary">Cancelar</button>
+                <button type="button"
+                    [disabled]="!(nombre && apellido_paterno && apellido_materno && costo_tramite && concepto_tramite)"
+                    data-target="#main-form"
+                    data-dismiss="modal"
+                    (click)="guardarTramite(tramiteForm)"
+                    class="btn btn-primary">Guardar</button>
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search bar -->
+    <div class="input-group mb-2">
+      <input type="text"
+        name="termino_busqueda"
+        [(ngModel)]="termino_busqueda"
+        class="form-control"
+        placeholder="Nombre del solicitante"
+        aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+
+    <!-- Loading -->
+    <div class="row mt-5 animated fadeIn" *ngIf="loading">
+        <div class="col text-center">
+            <i class="fa fa-sync-alt fa-spin fa-5x"></i>
         </div>
     </div>
-  </div>
-</div>
 
-<!-- Search bar -->
-<div class="input-group mb-2">
-  <input type="text"
-    name="termino_busqueda"
-    [(ngModel)]="termino_busqueda"
-    class="form-control"
-    placeholder="Nombre del solicitante"
-    aria-label="Username" aria-describedby="basic-addon1">
-</div>
-
-<!-- Loading -->
-<div class="row mt-5 animated fadeIn" *ngIf="loading">
-    <div class="col text-center">
-        <i class="fa fa-sync-alt fa-spin fa-5x"></i>
-    </div>
-</div>
-
-<!-- Tramites list -->
-<div class="mt-2">
-    <div *ngFor="let tramite of tramites | filterByName:termino_busqueda"
-    class="card m-1 animated fadeIn bg-light">
-      <div class="card-body">
-          <div class="col">
-              <div class="row">
-                  <div class="col-lg-10 col-md-10 col-sm-12">
-                      <h5 [routerLink]="['/tramite', tramite.$key]"
-                      style="cursor: pointer"
-                      class="card-title editable">{{ tramite.nombre | capitalize}}
-                          {{tramite.apellido_paterno | capitalize}}
-                          {{tramite.apellido_materno | capitalize}}</h5>
+    <!-- Tramites list -->
+    <div class="mt-2">
+        <div *ngFor="let tramite of tramites | filterByName:termino_busqueda"
+        class="card m-1 animated fadeIn bg-light">
+          <div class="card-body">
+              <div class="col">
+                  <div class="row">
+                      <div class="col-lg-10 col-md-10 col-sm-12">
+                          <h5 [routerLink]="['/tramite', tramite.$key]"
+                          style="cursor: pointer"
+                          class="card-title editable">{{ tramite.nombre | capitalize}}
+                              {{tramite.apellido_paterno | capitalize}}
+                              {{tramite.apellido_materno | capitalize}}</h5>
+                      </div>
+                      <div class="col-lg-2 col-md-2 col-sm-12">
+                          <button class="btn btn-danger"
+                          style="width: 100%"
+                          (click)="setTramiteForDelete(tramite)"
+                          data-toggle="modal"
+                          data-target="#deleteModal">
+                              <i class="far fa-trash-alt" style="color: white"></i>
+                          </button>
+                      </div>
                   </div>
-                  <div class="col-lg-2 col-md-2 col-sm-12">
-                      <button class="btn btn-danger"
-                      style="width: 100%"
-                      (click)="setTramiteForDelete(tramite)"
-                      data-toggle="modal"
-                      data-target="#deleteModal">
-                          <i class="far fa-trash-alt" style="color: white"></i>
-                      </button>
+              </div>
+              <div class="col">
+                  <div class="row mt-2">
+                      <div class="col-lg-10 col-md-10 col-sm-12">
+                          <p>
+                              Nombre del trámite: {{ tramite.concepto_tramite }}
+                              <span class="badge badge-pill badge-info">$ {{ tramite.costo_tramite | number}}</span>
+                          </p>
+                      </div>
+                      <div class="col-lg-2 col-md-2 col-sm-12">
+                          <button type="button"
+                          [routerLink]="['/pagos', tramite.$key]"
+                          style="width: 100%"
+                          class="btn btn-primary text-center">Abonos</button>
+                      </div>
                   </div>
               </div>
           </div>
-          <div class="col">
-              <div class="row mt-2">
-                  <div class="col-lg-10 col-md-10 col-sm-12">
-                      <p>
-                          Nombre del trámite: {{ tramite.concepto_tramite }}
-                          <span class="badge badge-pill badge-info">$ {{ tramite.costo_tramite | number}}</span>
-                      </p>
-                  </div>
-                  <div class="col-lg-2 col-md-2 col-sm-12">
-                      <button type="button"
-                      [routerLink]="['/pagos', tramite.$key]"
-                      style="width: 100%"
-                      class="btn btn-primary text-center">Abonos</button>
-                  </div>
-              </div>
-          </div>
-      </div>
+        </div>
     </div>
 </div>

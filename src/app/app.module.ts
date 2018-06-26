@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 //services
 import { TramiteService } from './services/tramite.service';
-
+import { AuthService } from './services/auth.service';
 import { AppComponent } from './app.component';
 import { TramitesComponent } from './components/tramites/tramites.component';
 import { PagosComponent } from './components/pagos/pagos.component';
@@ -26,6 +26,9 @@ import { FolioPipe } from './pipes/folio.pipe';
 import { PdfService } from './services/pdf.service';
 import { DateToTextPipe } from './pipes/date-to-text.pipe';
 import { NumberToTextPipe } from './pipes/number-to-text.pipe';
+import { LoginComponent } from './components/login/login.component';
+import { InicioComponent } from './components/inicio/inicio.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 
 @NgModule({
@@ -40,7 +43,10 @@ import { NumberToTextPipe } from './pipes/number-to-text.pipe';
     TramiteComponent,
     FolioPipe,
     DateToTextPipe,
-    NumberToTextPipe
+    NumberToTextPipe,
+    LoginComponent,
+    InicioComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,15 @@ import { NumberToTextPipe } from './pipes/number-to-text.pipe';
     FormsModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
-  providers: [TramiteService, AbonoService, PdfService, { provide: LOCALE_ID, useValue: "en-US" }],
+  providers: [
+      TramiteService,
+      AbonoService,
+      AuthService,
+      PdfService,
+      {
+          provide: LOCALE_ID,
+          useValue: "en-US" }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
