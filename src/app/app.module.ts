@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ToastyModule } from 'ng2-toasty';
 
 //services
 import { TramiteService } from './services/tramite.service';
@@ -52,6 +53,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ToastyModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES)
   ],
   providers: [
@@ -63,6 +65,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
           provide: LOCALE_ID,
           useValue: "en-US" }
     ],
+  exports: [ToastyModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
