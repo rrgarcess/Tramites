@@ -12,6 +12,7 @@ import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { DecimalPipe, DeprecatedDecimalPipe } from '@angular/common';
 import { DateToTextPipe } from '../../pipes/date-to-text.pipe';
 import { NumberToTextPipe } from '../../pipes/number-to-text.pipe';
+import { ToastOptions, ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'pagos',
@@ -36,6 +37,7 @@ export class PagosComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute,
                 private tramiteService: TramiteService,
                 private abonosService: AbonoService,
+                private toastyService: ToastyService,
                 private pdfService: PdfService) {
     }
 
@@ -67,8 +69,6 @@ export class PagosComponent implements OnInit, OnDestroy {
             });
         } else {
             //nuevo abono
-            console.log('agregar abono');
-            console.log(this.abonoActivo);
             if (!this.abonoActivo.fecha) {
                 this.abonoActivo.fecha = new Date();
             }
@@ -78,6 +78,7 @@ export class PagosComponent implements OnInit, OnDestroy {
                     console.log('abono agregado');
                     this.cargarTramiteActivo(this.tramiteActivo.$key);
                     this.cargarAbonos();
+                    this.showToastSuccess();
                 }
             });
         }
@@ -150,6 +151,18 @@ export class PagosComponent implements OnInit, OnDestroy {
 
     cancel(){
         this.abonoActivo = new Abono();
+    }
+
+    showToastSuccess(){
+        let toastOptions: ToastOptions = {
+            title: 'Abodo agregado',
+            msg: `El abono fue agregado correctamente`,
+            showClose: true,
+            timeout: 5000,
+            theme: 'bootstrap'
+        };
+
+        this.toastyService.success(toastOptions);
     }
 
 }

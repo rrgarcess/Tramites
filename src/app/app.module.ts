@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ToastyModule } from 'ng2-toasty';
@@ -30,6 +30,8 @@ import { NumberToTextPipe } from './pipes/number-to-text.pipe';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { ToastService } from './services/toast.service';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -53,6 +55,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    CommonModule,
     ToastyModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES)
   ],
@@ -60,11 +63,14 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
       TramiteService,
       AbonoService,
       AuthService,
+      ToastyModule,
+      ToastService,
       PdfService,
       {
           provide: LOCALE_ID,
           useValue: "en-US" }
     ],
+  schemas: [NO_ERRORS_SCHEMA],
   exports: [ToastyModule],
   bootstrap: [AppComponent]
 })

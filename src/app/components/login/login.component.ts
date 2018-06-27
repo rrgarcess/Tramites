@@ -11,26 +11,22 @@ import { ResponseMessage } from '../../model/message';
 })
 export class LoginComponent implements OnInit {
 
+    correo: string;
+    password: string;
+
     constructor(private authService: AuthService) {
 
     }
 
-    ngOnInit() {
-        this.agregarUsuario();
+    ngOnInit() {}
+
+    async login(){
+        let autorizado = await this.authService.obtenerStatusAuth(this.correo);
+
+        if(autorizado){
+            console.log('login');
+        }else {
+            console.log('error');
+        }
     }
-
-    agregarUsuario(){
-        let usuario: Usuario = {
-            tipo_usuario: 1,
-            nombre: 'Ruben',
-            apellido_paterno: 'Araus',
-            apellido_materno: 'García',
-            correo: 'ruben.araus.g@gmail.com',
-            telefono: '2731250757',
-            contrasena: 'admin123',
-            autorizado: true
-        };
-
-    }
-
 }

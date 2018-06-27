@@ -8,8 +8,73 @@
             <div class="text-right">
                 <button type="button" class="btn btn-primary" data-toggle="modal"
                 data-target=".bd-example-modal-lg">Nuevo Usuario</button>
-                <button type="button" (click)="addToast()"
-                class="btn btn-primary">Toast</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="row mt-5 animated fadeIn" *ngIf="false">
+        <div class="col text-center">
+            <i class="fa fa-sync-alt fa-spin fa-5x" style="color: black"></i>
+        </div>
+    </div>
+
+    <div class="row animated fadeIn">
+        <div class="col">
+            <div class="row">
+
+            <div *ngFor="let usuario of usuarios" class="col col-sm-12 col-md-12 col-lg-6">
+                <div class="card m-1 bg-light">
+                  <div class="card-body">
+                    <h4 class="card-title">
+                        <div class="row">
+                            <div class="col-10">
+                                {{ usuario.nombre }} {{ usuario.apellido_paterno }} {{ usuario.apellido_materno }}
+                            </div>
+
+                            <div class="col-2 text-right">
+                                <label class="switch">
+                                    <input type="checkbox"
+                                    [checked]="usuario.autorizado"
+                                    [(ngModel)]="usuario.autorizado">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- <container ngSwitch="{{usuario.tipo_usuario}}">
+                                <template [ngSwitchWhen]="1">
+                                    <h5>Tipo: Administrador</h5>
+                                </template>
+                            </container> -->
+
+                          <!-- <template [ngSwitchWhen]="2">
+                              <h5>Tipo: Estandar</h5>
+                          </template>
+                          <template [ngSwitchWhen]="3">
+                              <h5>Tipo: Temporal</h5>
+                          </template>
+                          <template ngSwitchDefault>
+                              <h5>Tipo: Estandar</h5>
+                          </template> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Correo: {{ usuario.correo }}</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Teléfono: {{ usuario.telefono }}</h5>
+                        </div>
+                    </div>
+
+                  </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>
@@ -106,3 +171,4 @@
     </div>
   </div>
 </div>
+<ng2-toasty [position]="'bottom-right'"></ng2-toasty>

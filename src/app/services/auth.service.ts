@@ -35,4 +35,48 @@ export class AuthService {
             });
         });
     }
+
+    cargarUsuarios(): Promise<Usuario[]>{
+        let usuarios: Usuario[] = [];
+
+        return new Promise((resolve, reject) => {
+            this.usuarios.once('value', data => {
+                let value = data.val();
+
+                for (let key in value) {
+                    if (value.hasOwnProperty(key)) {
+                        let user = value[key] as Usuario;
+                        user.$key = key;
+                        usuarios.push(user);
+                    }
+                }
+                console.log(usuarios);
+                resolve(usuarios)
+            });
+        });
+    }
+
+    obtenerStatusAuth(correo): Promise<boolean> {
+        return new Promise(async (resolve, reject) => {
+
+            await this.usuarios.orderByChild('correo')
+            .equalTo(correo)
+            .on('value', (result) => {
+
+                let object = result.val();
+                if (result.val() === null){
+                    resolve(false);
+                } else {
+
+                    let key = Object.keys(object)[0];
+                    if (object[key]) {
+                        resolve(object[key].autorizado);
+                    } else {
+                        resolve(false);
+                    }
+                }
+
+            });
+        });
+    }
 }
