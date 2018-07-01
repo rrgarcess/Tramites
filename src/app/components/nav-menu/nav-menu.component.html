@@ -1,5 +1,7 @@
-<nav class="navbar navbar-expand-lg custom-navbar">
-  <a class="navbar-brand" routerLink="/inicio" routerLinkActive="active" href="#">Inicio</a>
+<nav class="navbar navbar-expand-lg custom-navbar animated fadeIn">
+  <a class="navbar-brand" routerLink="/app/inicio" routerLinkActive="active" href="#">
+    Inicio
+  </a>
   <button class="navbar-toggler"
   type="button" data-toggle="collapse" data-target="#navbarNav"
   aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,8 +10,19 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/tramites" routerLinkActive="active" href="#">Trámites</a>
-      <a class="nav-item nav-link" routerLink="/usuarios" routerLinkActive="active" href="#">Usuarios</a>
+      <a class="nav-item nav-link" [routerLink]="['/app/tramites']" routerLinkActive="active" href="#">Trámites</a>
+      <div class="dropdown nav-item nav-link">
+          <a class=""
+          data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+            Cuenta
+        </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button *ngIf="isAdmin" class="dropdown-item" [routerLink]="['/app/usuarios']"
+            routerLinkActive="active" type="button">Usuarios</button>
+            <button class="dropdown-item" type="button" (click)="signOut()">Salir</button>
+          </div>
+      </div>
       <!-- <a class="nav-item nav-link" routerLinkActive="active" href="#">Pagos</a> -->
     </div>
   </div>

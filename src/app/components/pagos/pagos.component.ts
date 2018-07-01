@@ -46,7 +46,6 @@ export class PagosComponent implements OnInit, OnDestroy {
         this.subscriber = this.route.params
         .subscribe(params => {
             key = params['key'];
-            console.log('key', key)
         });
 
         this.cargarTramiteActivo(key)
@@ -64,6 +63,7 @@ export class PagosComponent implements OnInit, OnDestroy {
             .then((response: any) => {
                 console.log(response);
                 if (response.status == 'success') {
+                    this.showActualizarAbonoToast();
                     this.cargarAbonos();
                 }
             });
@@ -155,8 +155,18 @@ export class PagosComponent implements OnInit, OnDestroy {
 
     showToastSuccess(){
         let toastOptions: ToastOptions = {
-            title: 'Abodo agregado',
-            msg: `El abono fue agregado correctamente`,
+            title: 'Abodo agregado correctamente',
+            showClose: true,
+            timeout: 5000,
+            theme: 'bootstrap'
+        };
+
+        this.toastyService.success(toastOptions);
+    }
+
+    showActualizarAbonoToast(){
+        let toastOptions: ToastOptions = {
+            title: 'Abono actualizado correctamente',
             showClose: true,
             timeout: 5000,
             theme: 'bootstrap'

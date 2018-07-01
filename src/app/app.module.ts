@@ -32,6 +32,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { ToastService } from './services/toast.service';
 import { CommonModule } from '@angular/common';
+import { SplashscreenComponent } from './components/splashscreen/splashscreen.component';
+import { ApplicationComponent } from './components/application/application.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { CommonModule } from '@angular/common';
     NumberToTextPipe,
     LoginComponent,
     InicioComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    SplashscreenComponent,
+    ApplicationComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +75,6 @@ import { CommonModule } from '@angular/common';
           useValue: "en-US" }
     ],
   schemas: [NO_ERRORS_SCHEMA],
-  exports: [ToastyModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

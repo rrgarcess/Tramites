@@ -4,7 +4,7 @@ import { Tramite } from '../clases/tramite';
 import { environment } from '../../environments/environment';
 
 import * as firebase from 'firebase';
-firebase.initializeApp(environment.firebase)
+firebase.initializeApp(environment.firebase_prod)
 const db = firebase.database();
 
 
@@ -22,7 +22,6 @@ export class TramiteService {
     }
 
     guardarTramite(tramite: Tramite){
-        console.log('guardando tramite...');
         return new Promise((resolve, reject) => {
             try{
                 let t = {
@@ -46,7 +45,6 @@ export class TramiteService {
     }
 
     obtenerTramites(): Promise<Tramite[]>{
-        console.log('obteniendo tramites...')
         let tramites: Tramite[] = [];
 
         return new Promise((resolve, reject) => {
@@ -59,19 +57,16 @@ export class TramiteService {
                         tramites.push(t);
                     }
                 }
-                console.log(tramites);
                 resolve(tramites);
             });
         });
     }
 
     eliminarTramite($key: string){
-        console.log('eliminando tramite...');
         this.tramitesRef.child($key).remove();
     }
 
     obtenerTramite($key: string): Promise<Tramite> {
-        console.log('obtener tramite de: ' + $key);
 
         return new Promise((resolve, reject) => {
             let tramiteRef = db.ref('tramites/' + $key);

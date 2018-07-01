@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Tramite } from '../../clases/tramite';
 import { TramiteService } from '../../services/tramite.service';
-import { Router } from '@angular/router';
+import { ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'app-tramite',
@@ -17,6 +17,7 @@ export class TramiteComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
+                private toastyService: ToastyService,
                 private tramiteService: TramiteService) {
 
         this.route.params
@@ -41,8 +42,8 @@ export class TramiteComponent implements OnInit {
         this.tramiteService.actualizaTramite(this.$key, this.tramite)
         .then((response) => {
             console.log('Se ha guardado correctamente.');
-            this.router.navigateByUrl('/tramites');
-            console.log(response)
+            this.router.navigateByUrl('/app/tramites', {skipLocationChange: true});
+            this.toastyService.success('Información del trámite actualizada');
         });
     }
 

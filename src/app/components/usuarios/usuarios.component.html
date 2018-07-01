@@ -1,5 +1,4 @@
-<nav-menu></nav-menu>
-<div class="container">
+<div class="">
     <div class="row mt-5">
         <div class="col col-lg-10">
             <h2>Usuarios</h2>
@@ -13,10 +12,17 @@
     </div>
 
     <!-- Loading -->
-    <div class="row mt-5 animated fadeIn" *ngIf="false">
+    <div class="row mt-5 animated fadeIn" *ngIf="loading">
         <div class="col text-center">
             <i class="fa fa-sync-alt fa-spin fa-5x" style="color: black"></i>
         </div>
+    </div>
+
+    <!-- Show if does not exist usuarios -->
+    <div class="jumbotron fadeInDown"
+        *ngIf="!(usuarios.length > 0) && !loading"
+        style="margin-top: 10px;">
+        <h3 class="display-3 text-secondary text-center">No hay usuarios registrados</h3>
     </div>
 
     <div class="row animated fadeIn">
@@ -36,7 +42,8 @@
                                 <label class="switch">
                                     <input type="checkbox"
                                     [checked]="usuario.autorizado"
-                                    [(ngModel)]="usuario.autorizado">
+                                    [(ngModel)]="usuario.autorizado"
+                                    (change)="toggleAutorizacion(usuario)">
                                     <span class="slider round"></span>
                                 </label>
                             </div>
@@ -44,21 +51,7 @@
                     </h4>
                     <div class="row">
                         <div class="col-md-12">
-                            <!-- <container ngSwitch="{{usuario.tipo_usuario}}">
-                                <template [ngSwitchWhen]="1">
-                                    <h5>Tipo: Administrador</h5>
-                                </template>
-                            </container> -->
-
-                          <!-- <template [ngSwitchWhen]="2">
-                              <h5>Tipo: Estandar</h5>
-                          </template>
-                          <template [ngSwitchWhen]="3">
-                              <h5>Tipo: Temporal</h5>
-                          </template>
-                          <template ngSwitchDefault>
-                              <h5>Tipo: Estandar</h5>
-                          </template> -->
+                            <h5>Tipo usuario: {{ usuario.tipo_usuario == 1 ? 'Administrador' : 'Estandar' }}</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -135,6 +128,7 @@
                 <div class="form-group input-group-sm">
                     <label>Contraseña</label>
                     <input name="usuario.contrasena"
+                    minlength="6"
                     [(ngModel)]="usuario.contrasena"
                     type="password" class="form-control"
                     placeholder="Contraseña"
@@ -142,7 +136,8 @@
                 </div>
                 <div class="form-group input-group-sm">
                     <label>Repetir contraseña</label>
-                    <input name=""
+                    <input name="password2"
+                    [(ngModel)]="password2"
                     type="password" class="form-control"
                     placeholder="Repetir contraseña"
                     required>
@@ -161,8 +156,8 @@
         <div class="modal-footer">
             <button type="button"  data-dismiss="modal" class="btn btn-secondary">Cancelar</button>
             <button type="button"
-                [disabled]="!usuarioForm.valid"
-                data-target="#main-form"
+                [disabled]="!usuarioForm.valid || (usuario.contrasena != password2)"
+                data-target="#user-form"
                 data-dismiss="modal"
                 (click)="guardarUsuarioNuevo()"
                 class="btn btn-primary">Guardar</button>
@@ -171,4 +166,3 @@
     </div>
   </div>
 </div>
-<ng2-toasty [position]="'bottom-right'"></ng2-toasty>

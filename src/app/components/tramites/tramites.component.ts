@@ -3,6 +3,7 @@ import { TramiteService } from '../../services/tramite.service';
 import { Tramite } from '../../clases/tramite';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ToastOptions, ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'tramites',
@@ -27,7 +28,10 @@ export class TramitesComponent implements OnInit {
     termino_busqueda: string = "";
     loading: boolean = true;
 
-    constructor(private tramiteService: TramiteService) {}
+    constructor(private tramiteService: TramiteService,
+                private toastyService: ToastyService) {
+
+    }
 
     ngOnInit() {
         this.getTramites();
@@ -39,7 +43,7 @@ export class TramitesComponent implements OnInit {
                 console.log(response.status);
 
                 if (response.status === 'success') {
-                    console.log('dentro del success');
+                    this.showTramiteAgregadoToast();
                     this.getTramites();
                     tramite.reset();
                 }
@@ -58,14 +62,36 @@ export class TramitesComponent implements OnInit {
 
     deleteTramite(){
         if (this.tramiteSelected) {
-            console.log('deleting...');
             this.tramiteService.eliminarTramite(this.tramiteSelected.$key);
+            this.showTramiteEliminadoToast();
             this.getTramites();
         }
     }
 
     setTramiteForDelete(tramite){
         this.tramiteSelected = tramite;
+    }
+
+    showTramiteEliminadoToast(){
+        let options: ToastOptions = {
+            title: 'Trámite eliminado correctamente',
+            showClose: true,
+            timeout: 5000,
+            theme: 'bootstrap'
+        };
+
+        this.toastyService.success(options);
+    }
+
+    showTramiteAgregadoToast(){
+        let options: ToastOptions = {
+            title: 'Trámite agregado correctamente',
+            showClose: true,
+            timeout: 5000,
+            theme: 'bootstrap'
+        };
+
+        this.toastyService.success(options);
     }
 
 }

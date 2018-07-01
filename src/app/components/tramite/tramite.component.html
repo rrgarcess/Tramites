@@ -1,5 +1,4 @@
-<nav-menu></nav-menu>
-<div class="container">
+<div class="">
     <div class="mt-5 animated fadeIn">
         <div class="row">
             <div class="col col-md-10">
@@ -7,7 +6,7 @@
             </div>
             <div class="col col-md-2">
                 <button type="button"
-                [routerLink]="['/pagos', $key]"
+                [routerLink]="['/app/pagos', $key]"
                 class="btn btn-primary text-right">Ver Abonos</button>
             </div>
         </div>
@@ -64,7 +63,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"
-                [routerLink]="['/tramites']">Cancelar</button>
+                [routerLink]="['/app/tramites']">Cancelar</button>
                 <button type="button" class="btn btn-primary"
                 (click)="actualizaTramite()">Guardar</button>
 

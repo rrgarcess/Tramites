@@ -59,7 +59,6 @@ export class AbonoService {
       let folio = await this.incrementarFolio();
       abono.folio = folio;
 
-      console.log(abono);
 
       let resultKey = db.ref(`tramites/${this.tramiteActivo.$key}/abonos`).push(abono);
       if (resultKey) {
@@ -69,7 +68,6 @@ export class AbonoService {
           updates[`/cantidad_deudora`] = resto;
 
           db.ref(`tramites/${this.tramiteActivo.$key}/cantidad_deudora`).set(resto);
-          console.log('actualizar resto a: ', resto);
 
           return resultKey;
       }

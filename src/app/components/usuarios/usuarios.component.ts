@@ -4,26 +4,26 @@ import { TipoUsuario } from '../../model/tipo_usuario';
 import { AuthService } from '../../services/auth.service';
 import { ResponseMessage } from '../../model/message';
 import { Code } from '../../clases/codes';
-import { ToastyService, ToastOptions, ToastData } from 'ng2-toasty';
-import { ToastService } from '../../services/toast.service';
+import { ToastyService, ToastOptions } from 'ng2-toasty';
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css'],
-  providers: [ToastyService]
+  styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
 
+    loading: boolean = true;
     usuarios: Usuario[] = [];
     usuario: Usuario = new Usuario();
     tiposUsuario: TipoUsuario[] = [];
+    password2: string;
 
     constructor(private auth: AuthService,
-        private toastyService:ToastyService) {
+        private toastyService: ToastyService) {
         this.tiposUsuario.push({id: 1, nombre: 'Administrador', descripcion: ''});
         this.tiposUsuario.push({id: 2, nombre: 'Estandar', descripcion: ''});
-        this.tiposUsuario.push({id: 3, nombre: 'Temporal', descripcion: ''});
+        // this.tiposUsuario.push({id: 3, nombre: 'Temporal', descripcion: ''});
     }
 
     ngOnInit() {
@@ -33,7 +33,17 @@ export class UsuariosComponent implements OnInit {
     cargarUsuarios(){
         this.auth.cargarUsuarios()
         .then(usuarios => {
+            this.loading = false;
             this.usuarios = usuarios;
+        });
+    }
+
+    toggleAutorizacion(usuario){
+        this.auth.toggleAutorizacion(usuario)
+        .then(response => {
+            if (response.status == Code.SUCCESS) {
+                this.showPremisosToast(response.body);
+            }
         });
     }
 
@@ -45,8 +55,8 @@ export class UsuariosComponent implements OnInit {
         .then((response: ResponseMessage) => {
             if (response.status == Code.SUCCESS) {
 
-                console.log('Usuario agregado');
-                this.showToastSuccess(this.usuario.nombre);
+                this.cargarUsuarios();
+                this.showToastSuccess();
 
             } else if (response.status == Code.UNDEFINED) {
                 console.log(response.message);
@@ -62,11 +72,22 @@ export class UsuariosComponent implements OnInit {
         this.usuario = new Usuario();
     }
 
-    showToastSuccess(name?: string) {
+    showToastSuccess() {
 
         let options: ToastOptions = {
             title: 'Usuario agregado',
-            msg: `El usuario ${name} fue agregado correctamente`,
+            msg: `El usuario fue agregado correctamente`,
+            showClose: true,
+            timeout: 5000,
+            theme: 'bootstrap'
+        };
+
+        this.toastyService.success(options);
+    }
+
+    showPremisosToast(activo){
+        let options: ToastOptions = {
+            title: `Usuario ${ activo ? 'activado': 'desactivado' }`,
             showClose: true,
             timeout: 5000,
             theme: 'bootstrap'
@@ -77,7 +98,7 @@ export class UsuariosComponent implements OnInit {
 
     showToastError(){
         let options: ToastOptions = {
-            title: 'Error agregado usuario',
+            title: 'Error al agregar usuario',
             msg: `El usuario o correo ya fue registrado`,
             showClose: true,
             timeout: 5000,
