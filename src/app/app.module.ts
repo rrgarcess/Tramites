@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ToastyModule } from 'ng2-toasty';
 
-//services
+// services
 import { TramiteService } from './services/tramite.service';
 import { AuthService } from './services/auth.service';
 import { AppComponent } from './app.component';
@@ -13,10 +13,10 @@ import { TramitesComponent } from './components/tramites/tramites.component';
 import { PagosComponent } from './components/pagos/pagos.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 
-//Routes
+// Routes
 import { APP_ROUTES } from './app.router';
 
-//firebase
+// firebase
 import { environment } from '../environments/environment';
 import { AbonoService } from './services/abono.service';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
@@ -69,10 +69,7 @@ import { ApplicationComponent } from './components/application/application.compo
       AuthService,
       ToastyModule,
       ToastService,
-      PdfService,
-      {
-          provide: LOCALE_ID,
-          useValue: "es-ES" }
+      PdfService
     ],
   schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]

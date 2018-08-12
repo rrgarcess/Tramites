@@ -124,7 +124,7 @@ export class PagosComponent implements OnInit, OnDestroy {
         let capitalize = new CapitalizePipe();
         let numberToText = new NumberToTextPipe();
 
-        let date = `${this.dateFormat.transform(this.abonoActivo.fecha, 'd')} días de ${this.dateFormat.transform(this.abonoActivo.fecha, 'MMMM')} del ${this.dateFormat.transform(this.abonoActivo.fecha, 'yyyy')}`;
+        let date = `${this.dateFormat.transform(this.abonoActivo.fecha, 'd')} días de ${this.getSpanishMoth()} del ${this.dateFormat.transform(this.abonoActivo.fecha, 'yyyy')}`;
 
         let content: ContentPDF = {
             nombre_tramitante: capitalize.transform(this.tramiteActivo.nombre)
@@ -175,6 +175,48 @@ export class PagosComponent implements OnInit, OnDestroy {
         };
 
         this.toastyService.success(toastOptions);
+    }
+
+    getSpanishMoth(code?){
+      let monthCode;
+
+      if (code) {
+          monthCode = Number(this.dateFormat.transform(code, 'M'));
+      } else if(this.abonoActivo.fecha) {
+        monthCode = Number(this.dateFormat.transform(this.abonoActivo.fecha, 'M'));
+      }
+
+        switch(monthCode){
+          case 1:
+            return 'Enero';
+          case 2:
+            return 'Febrero';
+          case 3:
+            return 'Marzo';
+          case 4:
+            return 'Abril';
+          case 5:
+            return 'Mayo';
+          case 6:
+            return 'Junio';
+          case 7:
+            return 'Julio';
+          case 8:
+            return 'Agosto';
+          case 9:
+            return 'Septiembre';
+          case 10:
+            return 'Octubre';
+          case 11:
+            return 'Noviembre';
+          case 12:
+            return 'Diciembre';
+
+        }
+    }
+
+    getMonth(){
+      return 'Enero';
     }
 
 }

@@ -88,7 +88,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-5">
-                            {{abono.fecha | date:'d MMMM yyyy'}}
+                          {{abono.fecha | date:'d' }} de
+                            {{ getSpanishMoth(abono.fecha) }} del
+                            {{ abono.fecha | date:'yyyy' }}
                         </div>
                         <div class="col-md-7 text-right">
                             <p>{{ abono.descripcion }} &nbsp;</p>
@@ -196,7 +198,7 @@
                           </div>
                           <div class="col-6">
                               <h5> a los {{abonoActivo.fecha | date:'d' }} días del mes de
-                                {{ abonoActivo.fecha | date:'MMMM' }} del
+                                {{ getSpanishMoth() }} del
                                 {{ abonoActivo.fecha | date:'yyyy' }}</h5>
                           </div>
                       </div>
