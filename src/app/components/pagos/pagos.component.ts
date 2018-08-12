@@ -10,14 +10,14 @@ import { PdfService } from '../../services/pdf.service';
 import { ContentPDF } from '../../model/content';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe';
 import { DecimalPipe, DeprecatedDecimalPipe } from '@angular/common';
-import { DateToTextPipe } from '../../pipes/date-to-text.pipe';
 import { NumberToTextPipe } from '../../pipes/number-to-text.pipe';
 import { ToastOptions, ToastyService } from 'ng2-toasty';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'pagos',
   templateUrl: './pagos.component.html',
-  styleUrls: ['./pagos.component.css']
+  providers: [DatePipe]
 })
 export class PagosComponent implements OnInit, OnDestroy {
 
@@ -38,7 +38,8 @@ export class PagosComponent implements OnInit, OnDestroy {
                 private tramiteService: TramiteService,
                 private abonosService: AbonoService,
                 private toastyService: ToastyService,
-                private pdfService: PdfService) {
+                private pdfService: PdfService,
+                private dateFormat: DatePipe) {
     }
 
     ngOnInit() {
@@ -121,8 +122,9 @@ export class PagosComponent implements OnInit, OnDestroy {
 
     createPdf(){
         let capitalize = new CapitalizePipe();
-        let dateToText = new DateToTextPipe();
         let numberToText = new NumberToTextPipe();
+
+        let date = `${this.dateFormat.transform(this.abonoActivo.fecha, 'd')} días de ${this.dateFormat.transform(this.abonoActivo.fecha, 'MMMM')} del ${this.dateFormat.transform(this.abonoActivo.fecha, 'yyyy')}`;
 
         let content: ContentPDF = {
             nombre_tramitante: capitalize.transform(this.tramiteActivo.nombre)
@@ -133,7 +135,7 @@ export class PagosComponent implements OnInit, OnDestroy {
             tramite: this.tramiteActivo.concepto_tramite.length > 27 ? this.formatTramite() : this.tramiteActivo.concepto_tramite,
             cantidad: numberToText.transform(this.abonoActivo.cantidad_abonada),
             lugar: this.tramiteActivo.localidad,
-            fecha: dateToText.transform(this.abonoActivo.fecha)
+            fecha: date
         };
 
         this.pdfService.crearPDF(`${this.tramiteActivo.concepto_tramite}-${this.abonoActivo.fecha}.pdf`, content);

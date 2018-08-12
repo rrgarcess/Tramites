@@ -88,7 +88,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-5">
-                            {{abono.fecha | date}}
+                            {{abono.fecha | date:'d MMMM yyyy'}}
                         </div>
                         <div class="col-md-7 text-right">
                             <p>{{ abono.descripcion }} &nbsp;</p>
@@ -195,7 +195,9 @@
                             placeholder="Localidad o municipio">
                           </div>
                           <div class="col-6">
-                              <h5> a los {{abonoActivo.fecha | dateToText }}</h5>
+                              <h5> a los {{abonoActivo.fecha | date:'d' }} días del mes de
+                                {{ abonoActivo.fecha | date:'MMMM' }} del
+                                {{ abonoActivo.fecha | date:'yyyy' }}</h5>
                           </div>
                       </div>
                       <br>

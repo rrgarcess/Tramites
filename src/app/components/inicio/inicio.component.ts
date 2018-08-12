@@ -8,8 +8,7 @@ import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  templateUrl: './inicio.component.html'
 })
 export class InicioComponent implements OnInit {
 
@@ -49,11 +48,12 @@ export class InicioComponent implements OnInit {
     guardarTramite(tramite: NgForm){
         this.tramiteService.guardarTramite(tramite.value)
             .then((response:any) => {
-                console.log(response.status);
+                let key = response.key;
 
                 if (response.status === 'success') {
                     this.showTramiteAgregadoToast();
                     tramite.reset();
+                    this.router.navigate(['/app/pagos', key]);
                 }
             }).catch( error => console.log(error));
     }

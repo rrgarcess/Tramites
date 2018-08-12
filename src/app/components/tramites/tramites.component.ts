@@ -7,8 +7,7 @@ import { ToastOptions, ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'tramites',
-  templateUrl: './tramites.component.html',
-  styleUrls: ['./tramites.component.css']
+  templateUrl: './tramites.component.html'
 })
 export class TramitesComponent implements OnInit {
 

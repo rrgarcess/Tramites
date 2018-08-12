@@ -35,8 +35,8 @@ export class TramiteService {
                     cantidad_deudora: tramite.costo_tramite
                 };
 
-                this.tramitesRef.push(t);
-                resolve({status: 'success'});
+                let key = this.tramitesRef.push(t).key;
+                resolve({status: 'success', key: key});
             } catch(ex){
                 console.log(ex);
                 reject({status: 'error'});

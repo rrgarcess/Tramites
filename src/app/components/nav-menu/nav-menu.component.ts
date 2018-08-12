@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'nav-menu',
-  templateUrl: './nav-menu.component.html',
-  styleUrls: ['./nav-menu.component.css']
+  templateUrl: './nav-menu.component.html' 
 })
 export class NavMenuComponent implements OnInit {
 

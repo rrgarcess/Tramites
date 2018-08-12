@@ -72,7 +72,7 @@ import { ApplicationComponent } from './components/application/application.compo
       PdfService,
       {
           provide: LOCALE_ID,
-          useValue: "en-US" }
+          useValue: "es-ES" }
     ],
   schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]

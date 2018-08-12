@@ -3,8 +3,7 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'application',
-  templateUrl: './application.component.html',
-  styleUrls: ['./application.component.css']
+  templateUrl: './application.component.html'
 })
 export class ApplicationComponent implements OnInit, OnDestroy {
 

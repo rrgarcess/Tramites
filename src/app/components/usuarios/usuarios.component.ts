@@ -8,8 +8,7 @@ import { ToastyService, ToastOptions } from 'ng2-toasty';
 
 @Component({
   selector: 'app-usuarios',
-  templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  templateUrl: './usuarios.component.html'
 })
 export class UsuariosComponent implements OnInit {
 
